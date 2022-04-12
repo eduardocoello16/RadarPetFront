@@ -9,7 +9,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 body{
   margin: 0;
@@ -21,6 +20,9 @@ export default {
   name: 'App',
   components: {
     NavHeadder
+  },
+  mounted () {
+    this.$store.dispatch('getUserInfoFromCookie')
   }
 }
 </script>

@@ -17,17 +17,24 @@ export default {
       Ubicacion: ''
     }
   },
+  mounted () {
+    document.title = 'Nueva Mascota'
+    if (!this.$store.getters.getTokenSesion) {
+      this.$router.push('/iniciarsesion')
+    }
+  },
   methods: {
     enviarDatos () {
       const newPost = {
         Nombre: this.Nombre,
         Ubicacion: this.Ubicacion
       }
-      fetch('http://192.168.1.35:4000/mascota/nueva', {
+      fetch(`${process.env.VUE_APP_IP}mascota/nueva`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          key: this.$store.getters.getTokenSesion
         },
         body: JSON.stringify(newPost)
       })
