@@ -3,14 +3,14 @@ import Cookies from 'js-cookie'
 export default createStore({
   state: {
     tokenSesion: '',
-    nombreUsuario: ''
+    Usuario: ''
   },
   getters: {
     getTokenSesion: state => {
       return state.tokenSesion
     },
-    getNombreUsuario: state => {
-      return state.nombreUsuario
+    getUsuario: state => {
+      return state.Usuario
     }
   },
   mutations: {
@@ -18,7 +18,7 @@ export default createStore({
       state.tokenSesion = token
     },
     setUsuario (state, Usuario) {
-      state.nombreUsuario = Usuario
+      state.Usuario = Usuario
     }
   },
   actions: {

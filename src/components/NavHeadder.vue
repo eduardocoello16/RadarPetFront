@@ -2,7 +2,7 @@
   <nav class="home">
      <router-link to="/"> <h1>RadarPet</h1></router-link>
      <div>
-       <p>{{$store.getters.getNombreUsuario.email}}</p>
+      <router-link to="/perfil"  v-if="$store.getters.getUsuario"> <p>{{$store.getters.getUsuario.nombre}}</p> </router-link>
     <router-link to="/nuevamascota"><button>He perdido mi mascota</button></router-link>
     <router-link v-if="!$store.getters.getTokenSesion" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
     <button @click="cerrarSesion" v-if="$store.getters.getTokenSesion">Cerrar Sesión</button>

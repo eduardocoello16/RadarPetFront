@@ -23,6 +23,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getUserInfoFromCookie')
+    console.log(this.$store.getters.getUsuario)
   }
 }
 </script>

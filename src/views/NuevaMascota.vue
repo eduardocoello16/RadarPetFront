@@ -39,7 +39,11 @@ export default {
         body: JSON.stringify(newPost)
       })
         .then(respuesta => respuesta.json())
-        .then(respuesta => console.log(respuesta))
+        .then(respuesta => {
+          if (respuesta) {
+            this.$router.push('/mascotas')
+          }
+        })
     }
   }
 }
