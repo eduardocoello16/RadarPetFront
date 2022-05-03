@@ -62,6 +62,7 @@ export default {
         .then(respuesta => {
           if (respuesta.token) {
             this.$store.dispatch('setTokenSesion', respuesta.token)
+            this.$store.dispatch('setAvatarImage')
             this.$router.push('/')
           } else {
             this.errores = respuesta.msg

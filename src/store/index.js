@@ -3,9 +3,13 @@ import Cookies from 'js-cookie'
 export default createStore({
   state: {
     tokenSesion: '',
-    Usuario: ''
+    Usuario: '',
+    avatar: ''
   },
   getters: {
+    getAvatar: state => {
+      return state.avatar
+    },
     getTokenSesion: state => {
       return state.tokenSesion
     },
@@ -14,6 +18,9 @@ export default createStore({
     }
   },
   mutations: {
+    setAvatar: (state, avatar) => {
+      state.avatar = avatar
+    },
     setToken (state, token) {
       state.tokenSesion = token
     },
@@ -41,13 +48,29 @@ export default createStore({
           })
       }
     },
+    setAvatarImage: (context) => {
+      fetch(`${process.env.VUE_APP_IP}usuario/getAvatar/`, {
+        method: 'GET',
+        headers: {
+          Key: Cookies.get('token'),
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.blob())
+        .then(res => {
+          const imageObjectURL = URL.createObjectURL(res)
+          context.commit('setAvatar', imageObjectURL)
+        })
+    },
     cerrarSesion: (context) => {
       context.commit('setToken', '')
       context.commit('setUsuario', '')
+      context.commit('setAvatar', '')
       Cookies.remove('token')
       Cookies.remove('usuario')
     },
-    getUserInfoFromCookie: (context) => {
+    getUserInfo: (context) => {
       if (Cookies.get('token') && Cookies.get('usuario')) {
         context.commit('setToken', Cookies.get('token'))
         context.commit('setUsuario', JSON.parse(Cookies.get('usuario')))

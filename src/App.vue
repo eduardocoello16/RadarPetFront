@@ -21,9 +21,9 @@ export default {
   components: {
     NavHeadder
   },
-  mounted () {
-    this.$store.dispatch('getUserInfoFromCookie')
-    console.log(this.$store.getters.getUsuario)
+  created () {
+    this.$store.dispatch('getUserInfo')
+    this.$store.dispatch('setAvatarImage')
   }
 }
 </script>
