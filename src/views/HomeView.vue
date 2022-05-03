@@ -8,9 +8,7 @@
 export default {
   name: 'HomeView',
   mounted () {
-    if (this.$store.getters.getNombreUsuario) {
-      document.title = 'Bienvenido: ' + this.$store.getters.getNombreUsuario.email
-    }
+    document.title = 'RadarPet'
   }
 }
 </script>
