@@ -2,11 +2,11 @@
   <nav class="home">
      <router-link to="/"> <h1>RadarPet</h1></router-link>
      <div>
-         <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + $store.getters.getAvatar + ')' }" ></div>
-      <router-link to="/perfil"  v-if="$store.getters.getUsuario"> <p>{{$store.getters.getUsuario.nombre}}</p> </router-link>
+         <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div>
+      <router-link to="/perfil"  v-if="nombreUsuario"> <p>{{nombreUsuario}}</p> </router-link>
     <router-link to="/nuevamascota"><button>He perdido mi mascota</button></router-link>
-    <router-link v-if="!$store.getters.getTokenSesion" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
-    <button @click="cerrarSesion" v-if="$store.getters.getTokenSesion">Cerrar Sesión</button>
+    <router-link v-if="!token" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
+    <button @click="cerrarSesion" v-if="token">Cerrar Sesión</button>
     </div>
   </nav>
 </template>
@@ -14,20 +14,36 @@
 <script>
 export default {
   name: 'NavBar',
-  data () {
-    return {
-    }
-  },
   methods: {
     cerrarSesion () {
       this.$store.dispatch('cerrarSesion')
       this.$router.push('/')
     }
   },
-  mounted () {
-    // Si hay usuario en el store, hacer una petición para obtener su avatar
-
+  computed: {
+    token () {
+      if (this.$store.getters.getTokenSesion) {
+        return true
+      } else {
+        return false
+      }
+    },
+    obtener () {
+      if (this.$store.getters.getTokenSesion) {
+        return this.$store.getters.getAvatar
+      } else {
+        return ''
+      }
+    },
+    nombreUsuario () {
+      if (this.$store.getters.getUsuario) {
+        return this.$store.getters.getUsuario.nombre
+      } else {
+        return ''
+      }
+    }
   }
+  // Si hay usuario en el store, hacer una petición para obtener su avatar
 }
 </script>
 
@@ -57,7 +73,9 @@ export default {
      width: 80px;
       height: 80px;
       background-color: #23553f;
-        background-size: contain;
+          background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
         border-radius: 1em;
     }
 </style>

@@ -15,6 +15,7 @@ body{
 }
 </style>
 <script>
+import Cookies from 'js-cookie'
 import NavHeadder from './components/NavHeadder.vue'
 export default {
   name: 'App',
@@ -22,8 +23,12 @@ export default {
     NavHeadder
   },
   created () {
-    this.$store.dispatch('getUserInfo')
-    this.$store.dispatch('setAvatarImage')
+    if (Cookies.get('token') && Cookies.get('usuario')) {
+      this.$store.dispatch('getUserInfo')
+    }
+    if (this.$store.getters.getTokenSesion) {
+      this.$store.dispatch('setAvatarImage')
+    }
   }
 }
 </script>

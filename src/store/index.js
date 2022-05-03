@@ -71,10 +71,8 @@ export default createStore({
       Cookies.remove('usuario')
     },
     getUserInfo: (context) => {
-      if (Cookies.get('token') && Cookies.get('usuario')) {
-        context.commit('setToken', Cookies.get('token'))
-        context.commit('setUsuario', JSON.parse(Cookies.get('usuario')))
-      }
+      context.commit('setToken', Cookies.get('token'))
+      context.commit('setUsuario', JSON.parse(Cookies.get('usuario')))
     }
   },
   modules: {
