@@ -2,7 +2,7 @@
   <nav class="home">
      <router-link to="/"> <h1>RadarPet</h1></router-link>
      <div>
-         <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div>
+       <router-link to="/perfil"  v-if="obtener">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
       <router-link to="/perfil"  v-if="nombreUsuario"> <p>{{nombreUsuario}}</p> </router-link>
     <router-link to="/nuevamascota"><button>He perdido mi mascota</button></router-link>
     <router-link v-if="!token" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>

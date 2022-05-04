@@ -9,6 +9,8 @@ export default {
   name: 'HomeView',
   mounted () {
     document.title = 'RadarPet'
+    // El inicio va a redirigir a lista de mascotas de momento
+    this.$router.push('/mascotas')
   }
 }
 </script>
