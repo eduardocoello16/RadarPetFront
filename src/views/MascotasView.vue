@@ -30,7 +30,6 @@ export default {
       .then(respuesta => respuesta.json())
       .then(res => {
         this.mascotas = res
-        console.log(res)
       })
   }
 }

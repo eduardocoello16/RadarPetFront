@@ -129,6 +129,7 @@ export default {
     })
       .then(respuesta => respuesta.json())
       .then(res => {
+        console.log(res)
         this.mascotas = res
       })
   }

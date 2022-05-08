@@ -23,12 +23,19 @@
         <input type="text" v-model='Email' name="email" />
         <label for="password">Contraseña</label>
         <input type="password" v-model='Password' name="password" />
+        <img  id="imagenavatar" :src="imagen" alt="">
+        <label for="avatar">Avatar</label>
+         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
         <button id="enviar">Enviar</button>
         </form>
 
   </div>
-
 </template>
+<style>
+  #imagenavatar{
+    width: 100px;
+  }
+</style>
 <script>
 export default {
   data () {
@@ -38,13 +45,17 @@ export default {
       Apellido: '',
       Email: '',
       Password: '',
-      errores: ''
+      errores: '',
+      imagen: ''
     }
   },
   mounted () {
     document.title = 'Iniciar Sesión'
   },
   methods: {
+    onFileSelected (event) {
+      this.imagen = URL.createObjectURL(event.target.files[0])
+    },
     iniciarSesion () {
       const newPost = {
         email: this.Email,
@@ -76,13 +87,12 @@ export default {
         email: this.Email,
         password: this.Password
       }
+      const formData = new FormData()
+      formData.append('datos', JSON.stringify(newPost))
+      formData.append('avatar', this.$refs.foto.files[0])
       fetch(`${process.env.VUE_APP_IP}usuario/registrarse`, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPost)
+        body: formData
       })
         .then(respuesta => {
           if (respuesta.status === 200) {

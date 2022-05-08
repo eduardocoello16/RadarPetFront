@@ -1,10 +1,13 @@
 <template>
+<h2>Crear Mascotas</h2>
   <div class="pdsf">
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
       <label for="ubicacion">Ubicación</label>
       <input type="text" v-model='Ubicacion' name="ubicacion" />
+        <img  id="imagenavatar" :src="imagen" alt="">
+       <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
       <button id="enviar">Enviar</button>
       </form>
   </div>
@@ -14,6 +17,7 @@ export default {
   data () {
     return {
       Nombre: '',
+      imagen: '',
       Ubicacion: ''
     }
   },
@@ -24,19 +28,23 @@ export default {
     }
   },
   methods: {
+    onFileSelected (event) {
+      this.imagen = URL.createObjectURL(event.target.files[0])
+    },
     enviarDatos () {
       const newPost = {
         Nombre: this.Nombre,
         Ubicacion: this.Ubicacion
       }
+      const formData = new FormData()
+      formData.append('datos', JSON.stringify(newPost))
+      formData.append('foto', this.$refs.foto.files[0])
       fetch(`${process.env.VUE_APP_IP}mascota/nueva`, {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
           key: this.$store.getters.getTokenSesion
         },
-        body: JSON.stringify(newPost)
+        body: formData
       })
         .then(respuesta => respuesta.json())
         .then(respuesta => {
