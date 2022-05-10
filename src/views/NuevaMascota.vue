@@ -4,6 +4,14 @@
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
+      <label for="tipo">Tipo</label>
+      <input type="text" v-model='Tipo' name="Tipo" />
+      <label for="Raza">Raza</label>
+          <input type="text" v-model="Raza" id="raza" placeholder="Raza">
+          <label for="Edad">Edad</label>
+          <input type="number" v-model="edad" id="edad" placeholder="Edad">
+          <label for="Peso">Peso</label>
+          <input type="number" v-model="peso" id="peso" placeholder="Peso">
       <label for="ubicacion">Ubicación</label>
       <input type="text" v-model='Ubicacion' name="ubicacion" />
         <img  id="imagenavatar" :src="imagen" alt="">
@@ -18,7 +26,11 @@ export default {
     return {
       Nombre: '',
       imagen: '',
-      Ubicacion: ''
+      Ubicacion: '',
+      Tipo: '',
+      Raza: '',
+      edad: '',
+      peso: ''
     }
   },
   mounted () {
@@ -34,7 +46,11 @@ export default {
     enviarDatos () {
       const newPost = {
         Nombre: this.Nombre,
-        Ubicacion: this.Ubicacion
+        Ubicacion: this.Ubicacion,
+        Tipo: this.Tipo,
+        Raza: this.Raza,
+        Edad: this.edad,
+        Peso: this.peso
       }
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))
@@ -46,12 +62,14 @@ export default {
         },
         body: formData
       })
-        .then(respuesta => respuesta.json())
         .then(respuesta => {
-          if (respuesta) {
+          if (respuesta.status === 200) {
             this.$router.push('/mascotas')
+          } else {
+            return respuesta.json()
           }
         })
+        .then(respuesta => (console.log(respuesta)))
     }
   }
 }

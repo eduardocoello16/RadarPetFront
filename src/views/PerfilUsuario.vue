@@ -11,7 +11,7 @@
   <button id="enviar">Enviar</button>
 </form>
 <div v-for="mascota in mascotas" :key= "mascota.id">
-  <CardMascota :mascota="mascota"></CardMascota>
+  <CardMascota :mascota="mascota" :propiedad="true"></CardMascota>
 </div>
 
 </template>
