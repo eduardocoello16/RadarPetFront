@@ -11,7 +11,7 @@
   <button id="enviar">Enviar</button>
 </form>
 <div v-for="mascota in mascotas" :key= "mascota.id">
-  <CardMascota :mascota="mascota" :propiedad="true"></CardMascota>
+  <CardMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"></CardMascota>
 </div>
 
 </template>
@@ -61,12 +61,15 @@ export default {
   data () {
     return {
       user: '',
-      mascotas: '',
+      mascotas: [],
       imagen: '',
       status: ''
     }
   },
   methods: {
+    removeMascota (event) {
+      this.mascotas = this.mascotas.filter(mascota => mascota.id !== event.id)
+    },
     onFileSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
@@ -93,7 +96,7 @@ export default {
         })
     }
   },
-  async mounted () {
+  mounted () {
     fetch(`${process.env.VUE_APP_IP}usuario/getAvatar/`, {
       method: 'GET',
       headers: {
@@ -129,7 +132,6 @@ export default {
     })
       .then(respuesta => respuesta.json())
       .then(res => {
-        console.log(res)
         this.mascotas = res
       })
   }

@@ -7,7 +7,7 @@
     <p>{{this.Peso}}</p>
     <p>{{this.Ubicacion}}</p>
       <img  id="foto" :src="imagen" alt="">
-      <button @click="borrarMascota">Borrar</button>
+      <button v-if="propiedad == true" @click="borrarMascota">Borrar</button>
       <p>{{this.status}}</p>
         <form  @submit.prevent='cambiarFotoMascota' v-if="propiedad == true" >
           <label for="Nombre">Nombre</label>
@@ -43,6 +43,7 @@ export default {
     },
     mascota: Object
   },
+  emits: ['borrado'],
   data () {
     return {
       imagen: '',
@@ -75,12 +76,11 @@ export default {
         },
         method: 'DELETE'
       })
-        .then(response => response.json())
         .then(respuesta => {
           if (respuesta.status === 200) {
-            this.status = 'Mascota borrada correctamente'
+            this.$emit('borrado', this.mascota._id)
           } else {
-            this.status = respuesta.msg
+            console.log(respuesta.msg)
           }
         })
     }
