@@ -9,7 +9,7 @@
       <img  id="foto" :src="imagen" alt="">
       <button v-if="propiedad == true" @click="borrarMascota">Borrar</button>
       <p>{{this.status}}</p>
-        <form  @submit.prevent='cambiarFotoMascota' v-if="propiedad == true" >
+        <form  @submit.prevent='editarMascota' v-if="propiedad == true" >
           <label for="Nombre">Nombre</label>
           <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
            <label for="tipo">Tipo</label>
@@ -24,6 +24,7 @@
           <input type="text" v-model="Ubicacion" id="ubicacion" placeholder="Ubicacion">
     <label for="fotoMascota">Foto Mascota</label>
      <input @change="onFileMascotaSelected" type="file" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
+     <button type="submit">Guardar</button>
   </form>
 </template>
 <style scoped>
@@ -68,6 +69,33 @@ export default {
   methods: {
     onFileMascotaSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])
+    },
+    editarMascota () {
+      const formData = new FormData()
+      const datosMascotaEditar = {
+        Nombre: this.Nombre,
+        Tipo: this.Tipo,
+        Raza: this.Raza,
+        Edad: this.Edad,
+        Peso: this.Peso,
+        Ubicacion: this.Ubicacion
+      }
+      formData.append('datos', JSON.stringify(datosMascotaEditar))
+      formData.append('foto', this.$refs.fotoMascota.files[0])
+      fetch(`${process.env.VUE_APP_IP}mascota/updateDatos/${this.mascota._id}`, {
+        method: 'PUT',
+        headers: {
+          Key: this.$store.getters.getTokenSesion
+        },
+        body: formData
+      })
+        .then(respuesta => {
+          if (respuesta.status === 200) {
+            this.status = 'Datos actualizados'
+          } else {
+            this.status = respuesta.msg
+          }
+        })
     },
     borrarMascota () {
       fetch(`${process.env.VUE_APP_IP}mascota/mascota/${this.mascota._id}`, {
