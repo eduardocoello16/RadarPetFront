@@ -4,9 +4,13 @@ export default createStore({
   state: {
     tokenSesion: '',
     Usuario: '',
-    avatar: ''
+    avatar: '',
+    datosCargados: false
   },
   getters: {
+    getDatosCargados: state => {
+      return state.datosCargados
+    },
     getAvatar: state => {
       return state.avatar
     },
@@ -18,6 +22,9 @@ export default createStore({
     }
   },
   mutations: {
+    setDatosCargados (state, payload) {
+      state.datosCargados = payload
+    },
     setAvatar: (state, avatar) => {
       state.avatar = avatar
     },
@@ -44,7 +51,6 @@ export default createStore({
           .then(respuesta => respuesta.json())
           .then(respuesta => {
             context.commit('setUsuario', respuesta)
-            Cookies.set('usuario', JSON.stringify(respuesta), { sameSite: 'strict', secure: false })
           })
       }
     },
@@ -68,11 +74,30 @@ export default createStore({
       context.commit('setUsuario', '')
       context.commit('setAvatar', '')
       Cookies.remove('token')
-      Cookies.remove('usuario')
     },
     getUserInfo: (context) => {
       context.commit('setToken', Cookies.get('token'))
-      context.commit('setUsuario', JSON.parse(Cookies.get('usuario')))
+      if (Cookies.get('token')) {
+        fetch(`${process.env.VUE_APP_IP}usuario/getUsuario`, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            key: Cookies.get('token')
+          }
+        })
+          .then(respuesta => {
+            if (respuesta.status === 200) {
+              return respuesta.json()
+            } else {
+              // Cerrar sesion
+              context.dispatch('cerrarSesion')
+            }
+          })
+          .then(respuesta => {
+            context.commit('setUsuario', respuesta)
+          })
+      }
     }
   },
   modules: {

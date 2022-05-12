@@ -23,10 +23,8 @@ export default {
     NavHeadder
   },
   created () {
-    if (Cookies.get('token') && Cookies.get('usuario')) {
+    if (Cookies.get('token')) {
       this.$store.dispatch('getUserInfo')
-    }
-    if (this.$store.getters.getTokenSesion) {
       this.$store.dispatch('setAvatarImage')
     }
   }

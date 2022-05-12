@@ -2,11 +2,11 @@
   <nav class="home">
      <router-link to="/"> <h1>RadarPet</h1></router-link>
      <div>
-       <router-link to="/perfil"  v-if="obtener">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
-      <router-link to="/perfil"  v-if="nombreUsuario"> <p>{{nombreUsuario}}</p> </router-link>
-    <router-link to="/nuevamascota"><button>He perdido mi mascota</button></router-link>
-    <router-link v-if="!token" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
-    <button @click="cerrarSesion" v-if="token">Cerrar Sesión</button>
+       <router-link to="/perfil"  v-if="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
+      <router-link to="/perfil"> <p>{{nombreUsuario}}</p> </router-link>
+    <router-link to="/nuevamascota"><button>Publicar mascota</button></router-link>
+    <router-link v-if="token === ''" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
+    <button @click="cerrarSesion" v-if="token !== ''">Cerrar Sesión</button>
     </div>
   </nav>
 </template>
@@ -22,25 +22,13 @@ export default {
   },
   computed: {
     token () {
-      if (this.$store.getters.getTokenSesion) {
-        return true
-      } else {
-        return false
-      }
+      return (this.$store.getters.getTokenSesion)
     },
     obtener () {
-      if (this.$store.getters.getTokenSesion) {
-        return this.$store.getters.getAvatar
-      } else {
-        return ''
-      }
+      return this.$store.getters.getAvatar
     },
     nombreUsuario () {
-      if (this.$store.getters.getUsuario) {
-        return this.$store.getters.getUsuario.nombre
-      } else {
-        return ''
-      }
+      return this.$store.getters.getUsuario.nombre
     }
   }
   // Si hay usuario en el store, hacer una petición para obtener su avatar

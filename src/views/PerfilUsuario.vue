@@ -2,13 +2,13 @@
 <h2>Bienvenido {{user.nombre}}</h2>
 <p>Tu mail es {{user.email}}</p>
  <form  @submit.prevent='subirFoto'>
-   <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + imagen + ')' }" >
+   <div id="avatar"  :style="{ backgroundImage: 'url(' + imagen + ')' }" >
      <div class="cover">
      <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
      </div>
      </div>
           <p>{{status}}</p>
-  <button id="enviar">Enviar</button>
+  <button id="enviar" type="submit">Enviar</button>
 </form>
 <div v-for="mascota in mascotas" :key= "mascota.id">
   <CardMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"></CardMascota>
