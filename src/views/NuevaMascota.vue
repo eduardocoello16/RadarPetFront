@@ -5,7 +5,10 @@
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
       <label for="tipo">Tipo</label>
-      <input type="text" v-model='Tipo' name="Tipo" />
+      <select name="tipo" id="tipo"  v-model='Tipo' >
+        <option value="Perro">Perro</option>
+        <option value="Gato">Gato</option>
+      </select>
       <label for="Raza">Raza</label>
           <input type="text" v-model="Raza" id="raza" placeholder="Raza">
           <label for="Edad">Edad</label>

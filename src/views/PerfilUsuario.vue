@@ -68,7 +68,8 @@ export default {
   },
   methods: {
     removeMascota (event) {
-      this.mascotas = this.mascotas.filter(mascota => mascota.id !== event.id)
+      const id = this.mascotas.findIndex(mascota => mascota.id === event)
+      this.mascotas.splice(id, 1)
     },
     onFileSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])

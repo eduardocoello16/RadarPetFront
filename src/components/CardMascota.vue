@@ -6,26 +6,30 @@
     <p>{{this.Edad}}</p>
     <p>{{this.Peso}}</p>
     <p>{{this.Ubicacion}}</p>
-      <img  id="foto" :src="imagen" alt="">
-      <button v-if="propiedad == true" @click="borrarMascota">Borrar</button>
-      <p>{{this.status}}</p>
-        <form  @submit.prevent='editarMascota' v-if="propiedad == true" >
+      <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
+      <div v-if="propiedad == true">
+        <div v-if="this.isCaducada == true">
+        <p>Mascota Caducada, si quiere volver a activarla otros 3 meses pulsa aquí</p>
+        <button @click="activarMascota">Activar Mascota</button>
+        </div>
+        <div v-else>
+        <form  @submit.prevent='editarMascota'>
           <label for="Nombre">Nombre</label>
           <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
-           <label for="tipo">Tipo</label>
-          <input type="text" v-model='Tipo' name="Tipo" />
           <label for="Raza">Raza</label>
           <input type="text" v-model="Raza" id="raza" placeholder="Raza">
           <label for="Edad">Edad</label>
           <input type="number" v-model="Edad" id="edad" placeholder="Edad">
-          <label for="Peso">Peso</label>
-          <input type="number" v-model="Peso" id="peso" placeholder="Peso">
           <label for="Ubicacion">Ubicacion</label>
           <input type="text" v-model="Ubicacion" id="ubicacion" placeholder="Ubicacion">
     <label for="fotoMascota">Foto Mascota</label>
      <input @change="onFileMascotaSelected" type="file" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
      <button type="submit">Guardar</button>
   </form>
+        </div>
+      <button @click="borrarMascota">Borrar</button>
+      <p>{{this.status}}</p>
+      </div>
 </template>
 <style scoped>
 #foto{
@@ -47,6 +51,7 @@ export default {
   emits: ['borrado'],
   data () {
     return {
+      isCaducada: false,
       imagen: '',
       status: '',
       Nombre: this.mascota.Nombre,
@@ -58,6 +63,10 @@ export default {
     }
   },
   mounted () {
+    const fechaexp = new Date(this.mascota.FechaExpiracion)
+    if (fechaexp < new Date()) {
+      this.isCaducada = true
+    }
     fetch(`${process.env.VUE_APP_IP}mascota/fotoMascota/${this.mascota._id}`, {
     })
       .then(response => response.blob())
@@ -98,21 +107,31 @@ export default {
         })
     },
     borrarMascota () {
-      fetch(`${process.env.VUE_APP_IP}mascota/mascota/${this.mascota._id}`, {
-        headers: {
-          Key: this.$store.getters.getTokenSesion
-        },
-        method: 'DELETE'
-      })
-        .then(respuesta => {
-          if (respuesta.status === 200) {
-            this.$emit('borrado', this.mascota._id)
-          } else {
-            console.log(respuesta.msg)
-          }
+      if (confirm('¿Estas seguro de borrar la mascota?')) {
+        fetch(`${process.env.VUE_APP_IP}mascota/mascota/${this.mascota._id}`, {
+          headers: {
+            Key: this.$store.getters.getTokenSesion
+          },
+          method: 'DELETE'
         })
+          .then(respuesta => {
+            if (respuesta.status === 200) {
+              this.$emit('borrado', this.mascota._id)
+            } else {
+              console.log(respuesta.msg)
+            }
+          })
+      }
     }
   }
 
 }
 </script>
+
+<style scoped>
+.caducada{
+   -webkit-filter: grayscale(1); /* Webkit */
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* W3C */
+}
+</style>
