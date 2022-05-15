@@ -1,6 +1,11 @@
 <template>
 <h2>Crear Mascotas</h2>
-  <div class="pdsf">
+<div v-if="!tipoestado">
+<button @click="tipoestado = 'Encontrado'">Encontrado</button>
+<button @click="tipoestado = 'Perdido'">Perdido</button>
+</div>
+
+  <div v-if="tipoestado" class="pdsf">
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
@@ -17,6 +22,8 @@
           <input type="number" v-model="peso" id="peso" placeholder="Peso">
       <label for="ubicacion">Ubicación</label>
       <input type="text" v-model='Ubicacion' name="ubicacion" />
+      <label for="descripcion">Descripción</label>
+      <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
         <img  id="imagenavatar" :src="imagen" alt="">
        <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
       <button id="enviar">Enviar</button>
@@ -27,9 +34,11 @@
 export default {
   data () {
     return {
+      tipoestado: '',
       Nombre: '',
       imagen: '',
       Ubicacion: '',
+      Descripcion: '',
       Tipo: '',
       Raza: '',
       edad: '',
@@ -48,12 +57,14 @@ export default {
     },
     enviarDatos () {
       const newPost = {
+        TipoEstado: this.tipoestado,
         Nombre: this.Nombre,
         Ubicacion: this.Ubicacion,
         Tipo: this.Tipo,
         Raza: this.Raza,
         Edad: this.edad,
-        Peso: this.peso
+        Peso: this.peso,
+        Descripcion: this.Descripcion
       }
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))

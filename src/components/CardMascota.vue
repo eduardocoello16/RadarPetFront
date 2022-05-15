@@ -1,11 +1,12 @@
 <template>
     <h2>Tu mascota</h2>
-    <p>{{this.Nombre}}</p>
-    <p>{{this.Tipo}}</p>
-    <p>{{this.Raza}}</p>
-    <p>{{this.Edad}}</p>
-    <p>{{this.Peso}}</p>
-    <p>{{this.Ubicacion}}</p>
+    <p>Nombre: {{this.Nombre}}</p>
+    <p>Tipo: {{this.Tipo}}</p>
+    <p> Raza: {{this.Raza}}</p>
+    <p> Edad: {{this.Edad}}</p>
+    <p>Peso: {{this.Peso}}</p>
+    <p>Descripcion: {{this.Descripcion}}</p>
+    <p> Ubicacion: {{this.Ubicacion}}</p>
       <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
       <div v-if="propiedad == true">
         <div v-if="this.isCaducada == true">
@@ -18,8 +19,12 @@
           <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
           <label for="Raza">Raza</label>
           <input type="text" v-model="Raza" id="raza" placeholder="Raza">
+          <label for="Peso">Peso</label>
+          <input type="number" v-model="Peso" id="peso" placeholder="Peso">
           <label for="Edad">Edad</label>
           <input type="number" v-model="Edad" id="edad" placeholder="Edad">
+           <label for="descripcion">Descripción</label>
+      <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
           <label for="Ubicacion">Ubicacion</label>
           <input type="text" v-model="Ubicacion" id="ubicacion" placeholder="Ubicacion">
     <label for="fotoMascota">Foto Mascota</label>
@@ -59,6 +64,7 @@ export default {
       Raza: this.mascota.Raza,
       Edad: this.mascota.Edad,
       Peso: this.mascota.Peso,
+      Descripcion: this.Descripcion,
       Ubicacion: this.mascota.Ubicacion
     }
   },
@@ -76,6 +82,19 @@ export default {
       })
   },
   methods: {
+    activarMascota () {
+      fetch(`${process.env.VUE_APP_IP}mascota/aumentarCaducidad/${this.mascota._id}`, {
+        method: 'PUT',
+        headers: {
+          Key: this.$store.getters.getTokenSesion
+        }
+      })
+        .then(res => res.json())
+        .then(res => {
+          this.status = res.msg
+          this.isCaducada = false
+        })
+    },
     onFileMascotaSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
