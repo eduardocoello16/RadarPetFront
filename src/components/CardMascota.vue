@@ -64,7 +64,7 @@ export default {
       Raza: this.mascota.Raza,
       Edad: this.mascota.Edad,
       Peso: this.mascota.Peso,
-      Descripcion: this.Descripcion,
+      Descripcion: this.mascota.Descripcion,
       Ubicacion: this.mascota.Ubicacion
     }
   },
