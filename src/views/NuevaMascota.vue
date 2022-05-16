@@ -20,6 +20,11 @@
           <input type="number" v-model="edad" id="edad" placeholder="Edad">
           <label for="Peso">Peso</label>
           <input type="number" v-model="peso" id="peso" placeholder="Peso">
+          <label for="contacto">Contacto</label>
+          <select name="contacto" id="contacto"  v-model="tipocontacto" >
+            <option value="tel">Teléfono</option>
+            <option value="mail">E-mail</option>
+          </select>
       <label for="ubicacion">Ubicación</label>
       <input type="text" v-model='Ubicacion' name="ubicacion" />
       <label for="descripcion">Descripción</label>
@@ -35,6 +40,7 @@ export default {
   data () {
     return {
       tipoestado: '',
+      contacto: '',
       Nombre: '',
       imagen: '',
       Ubicacion: '',
@@ -42,7 +48,8 @@ export default {
       Tipo: '',
       Raza: '',
       edad: '',
-      peso: ''
+      peso: '',
+      tipocontacto: ''
     }
   },
   mounted () {
@@ -56,6 +63,11 @@ export default {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
     enviarDatos () {
+      if (this.tipocontacto === 'tel') {
+        this.contacto = this.$store.getters.getUsuario.telefono
+      } else {
+        this.contacto = this.$store.getters.getUsuario.email
+      }
       const newPost = {
         TipoEstado: this.tipoestado,
         Nombre: this.Nombre,
@@ -64,8 +76,11 @@ export default {
         Raza: this.Raza,
         Edad: this.edad,
         Peso: this.peso,
+        Tipocontacto: this.tipocontacto,
+        Contacto: this.contacto,
         Descripcion: this.Descripcion
       }
+
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))
       formData.append('foto', this.$refs.foto.files[0])

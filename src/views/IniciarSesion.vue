@@ -19,6 +19,8 @@
         <input type="text" v-model='Nombre' name="nombre" />
            <label for="apellido">Apellido</label>
         <input type="text" v-model='Apellido' id="apellido" name="apellido" />
+        <label for="tel">Teléfono</label>
+        <input type="text" v-model='telefono' id="tel" name="tel" />
         <label for="email">Email</label>
         <input type="text" v-model='Email' name="email" />
         <label for="password">Contraseña</label>
@@ -43,6 +45,7 @@ export default {
       modo: 'login',
       Nombre: '',
       Apellido: '',
+      telefono: '',
       Email: '',
       Password: '',
       errores: '',
@@ -85,7 +88,8 @@ export default {
         nombre: this.Nombre,
         Apellido: this.Apellido,
         email: this.Email,
-        password: this.Password
+        password: this.Password,
+        telefono: this.telefono
       }
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))

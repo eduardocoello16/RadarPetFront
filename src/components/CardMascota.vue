@@ -5,6 +5,7 @@
     <p> Raza: {{this.Raza}}</p>
     <p> Edad: {{this.Edad}}</p>
     <p>Peso: {{this.Peso}}</p>
+    <p> Contacto: {{this.Contacto}}</p>
     <p>Descripcion: {{this.Descripcion}}</p>
     <p> Ubicacion: {{this.Ubicacion}}</p>
       <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
@@ -19,6 +20,16 @@
           <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
           <label for="Raza">Raza</label>
           <input type="text" v-model="Raza" id="raza" placeholder="Raza">
+          <label for="tipo">Tipo</label>
+          <select name="tipo" id="tipo"  v-model="Tipo" >
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+          </select>
+          <label for="contacto">Contacto</label>
+           <select name="contacto" id="contacto"  v-model="Tipocontacto" >
+            <option value="tel">Teléfono</option>
+            <option value="mail">E-mail</option>
+          </select>
           <label for="Peso">Peso</label>
           <input type="number" v-model="Peso" id="peso" placeholder="Peso">
           <label for="Edad">Edad</label>
@@ -59,6 +70,8 @@ export default {
       isCaducada: false,
       imagen: '',
       status: '',
+      Tipocontacto: this.mascota.Tipocontacto,
+      Contacto: this.mascota.Contacto,
       Nombre: this.mascota.Nombre,
       Tipo: this.mascota.Tipo,
       Raza: this.mascota.Raza,
@@ -99,6 +112,11 @@ export default {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
     editarMascota () {
+      if (this.Tipocontacto === 'tel') {
+        this.Contacto = this.$store.getters.getUsuario.telefono
+      } else {
+        this.Contacto = this.$store.getters.getUsuario.email
+      }
       const formData = new FormData()
       const datosMascotaEditar = {
         Nombre: this.Nombre,
@@ -106,7 +124,9 @@ export default {
         Raza: this.Raza,
         Edad: this.Edad,
         Peso: this.Peso,
-        Ubicacion: this.Ubicacion
+        Ubicacion: this.Ubicacion,
+        Contacto: this.Contacto,
+        Tipocontacto: this.Tipocontacto
       }
       formData.append('datos', JSON.stringify(datosMascotaEditar))
       formData.append('foto', this.$refs.fotoMascota.files[0])
