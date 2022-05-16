@@ -1,8 +1,12 @@
 <template>
-<p>Lista Mascotas:</p>
-<div v-for="mascota in mascotas" :key= "mascota.id">
+<h1>Lista Mascotas:</h1>
+  <h2>Encontradas</h2>
+<div id="encontradas" v-for="mascota in mascotasEncontradas" :key= "mascota.id">
   <CardMascota :mascota="mascota"></CardMascota>
-
+</div>
+  <h2>Perdidas</h2>
+<div id="perdidas" v-for="mascota in mascotasPerdidas" :key= "mascota.id">
+  <CardMascota :mascota="mascota"></CardMascota>
 </div>
 
 </template>
@@ -15,7 +19,9 @@ export default {
   },
   data () {
     return {
-      mascotas: ''
+      mascotas: [],
+      mascotasEncontradas: [],
+      mascotasPerdidas: []
     }
   },
   mounted () {
@@ -30,7 +36,17 @@ export default {
       .then(respuesta => respuesta.json())
       .then(res => {
         this.mascotas = res
+        this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdido')
+        this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
       })
   }
 }
 </script>
+<style scoped>
+#encontradas{
+  background-color: #c34444;
+}
+#perdidas{
+  background-color: #2485a0;
+}
+</style>

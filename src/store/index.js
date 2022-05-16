@@ -95,7 +95,6 @@ export default createStore({
             }
           })
           .then(respuesta => {
-            console.log(respuesta)
             context.commit('setUsuario', respuesta)
           })
       }

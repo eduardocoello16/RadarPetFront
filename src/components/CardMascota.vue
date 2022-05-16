@@ -126,6 +126,7 @@ export default {
         Peso: this.Peso,
         Ubicacion: this.Ubicacion,
         Contacto: this.Contacto,
+        Descripcion: this.Descripcion,
         Tipocontacto: this.Tipocontacto
       }
       formData.append('datos', JSON.stringify(datosMascotaEditar))
