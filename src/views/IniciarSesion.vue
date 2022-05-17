@@ -15,6 +15,7 @@
       </div>
       <form v-if="modo == 'register'" @submit.prevent='registrarUsuario'>
       <h2>Registrarse</h2>
+      <p>{{errores}}</p>
          <label for="nombre">Nombre</label>
         <input type="text" v-model='Nombre' name="nombre" />
            <label for="apellido">Apellido</label>
@@ -48,6 +49,7 @@ export default {
       telefono: '',
       Email: '',
       Password: '',
+      Password2: '',
       errores: '',
       imagen: ''
     }
@@ -84,6 +86,8 @@ export default {
         })
     },
     registrarUsuario () {
+      // Comprobar errores
+
       const newPost = {
         nombre: this.Nombre,
         Apellido: this.Apellido,
@@ -101,6 +105,13 @@ export default {
         .then(respuesta => {
           if (respuesta.status === 200) {
             this.modo = 'login'
+          } else {
+            return respuesta.json()
+          }
+        })
+        .then(respuesta => {
+          if (respuesta) {
+            this.errores = respuesta.msg
           }
         })
     }
