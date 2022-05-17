@@ -39,6 +39,7 @@ padding: 0;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 1em;
+      margin-bottom: 2em;
     background-color: #23553f;
   }
 #cardIdenti{
