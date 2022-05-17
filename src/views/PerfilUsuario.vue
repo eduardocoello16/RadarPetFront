@@ -1,7 +1,8 @@
 <template>
 <div id="datosUsuario">
 <form  @submit.prevent='EditarUsuario'>
-      <h2>Bienvenido {{user.nombre}}</h2>
+      <h2>Bienvenido {{datoUsuario.nombre}}</h2>
+      <p>{{editUserStatus}}</p>
          <label for="nombre">NombreUsuario</label>
         <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
            <label for="apellido">Apellido</label>
@@ -11,7 +12,7 @@
         <label for="email">Email</label>
         <input type="text" v-model='user.email' id="mail" name="email" />
         <label for="avatar">Avatar</label>
-         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
+         <input @change="onFileSelected" type="file" id="imagenup" ref="avatar" name="foto" />
         <button id="enviar">Actualizar Datos</button>
         </form>
         <section>
@@ -69,38 +70,44 @@ export default {
       user: '', // obtengo el usuario de la store
       mascotas: [],
       imagen: this.$store.getters.getAvatar,
-      status: ''
+      status: '',
+      editUserStatus: ''
     }
   },
   methods: {
-    removeMascota (event) {
-      const id = this.mascotas.findIndex(mascota => mascota.id === event)
-      this.mascotas.splice(id, 1)
-    },
-    onFileSelected (event) {
-      this.imagen = URL.createObjectURL(event.target.files[0])
-    },
-    subirFoto () {
+    EditarUsuario () {
       const formData = new FormData()
-      formData.append('avatar', this.$refs.foto.files[0])
-      fetch(`${process.env.VUE_APP_IP}usuario/uploadAvatar`, {
+      formData.append('datos', JSON.stringify(this.user))
+      formData.append('avatar', this.$refs.avatar.files[0])
+      fetch(`${process.env.VUE_APP_IP}usuario/updateDatos/`, {
         method: 'PUT',
         headers: {
           Key: this.$store.getters.getTokenSesion
         },
         body: formData
       })
-        .then(respuesta => {
-          this.$store.dispatch('setAvatarImage')
-          return respuesta.json()
-        })
-        .then(respuesta => {
-          if (respuesta.status === 200) {
-            this.status = 'Foto subida correctamente'
-          } else {
-            this.status = respuesta.msg
+        .then(res => {
+          if (res.status === 200) {
+            this.$store.dispatch('getUserInfo')
+            this.$store.dispatch('setAvatarImage')
           }
+          return res.json()
         })
+        .then(res => {
+          this.editUserStatus = res.msg
+        })
+    },
+    removeMascota (event) {
+      const id = this.mascotas.findIndex(mascota => mascota.id === event)
+      this.mascotas.splice(id, 1)
+    },
+    onFileSelected (event) {
+      this.imagen = URL.createObjectURL(event.target.files[0])
+    }
+  },
+  computed: {
+    datoUsuario () {
+      return this.$store.getters.getUsuario
     }
   },
   created () {
@@ -119,7 +126,6 @@ export default {
           this.imagen = imageObjectURL
         })
     }
-
     fetch(`${process.env.VUE_APP_IP}usuario/getUsuario`, {
       method: 'GET',
       headers: {

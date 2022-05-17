@@ -16,6 +16,7 @@
       <div id="register" v-if="modo == 'register'">
       <form  @submit.prevent='registrarUsuario'>
       <h2>Registra tus datos</h2>
+       <p>{{errores}}</p>
          <label for="NombreUsuario">Nombre</label>
         <input type="text" v-model='Nombre'  id="NombreUsuario" name="nombre" />
            <label for="apellido">Apellido</label>
@@ -37,53 +38,13 @@
   </div>
 </template>
 <style>
-  #avatar{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 1em;
-    background-color: #23553f;
-  }
-  section{
+ section{
         width: 50%;
   }
-#cardIdenti{
-    width: 330px;
-    height: 580px;
-}
-#identi{
-  width: 100%;
-  margin: 0;
-  height: 50%;
-  background-image: url(../assets/identificación.svg);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-#identiInfo{
-  overflow: hidden;
-  white-space: nowrap;
-  background: rgb(224, 224, 224);
-  margin-top: 0;
-  width: 100%;
-  height: 50%;
-  text-align: start;
-    box-sizing: border-box;
-    margin-top: -30px;
-  padding: 2em;
-  border-end-end-radius: 1em;
-    border-end-start-radius: 1em;
-      box-shadow: -4px 9px 25px 0px rgba(0, 0, 0, 0.075);
-}
 #register{
   display: flex;
 }
-  #imagenavatar{
-    width: 100px;
-  }
+
 </style>
 <script>
 import CardIdentificacion from '../components/CardIdentificacion.vue'

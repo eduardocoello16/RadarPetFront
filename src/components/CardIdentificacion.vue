@@ -25,11 +25,12 @@ export default {
 <style scoped>
 .dato{
   display: flex;
-  margin: 5px 0 5px 0;
+  margin: 1em 0 1em 0;
 }
 p{
 margin: 0;
 padding: 0;
+font-size: 1em;
 }
   #avatar{
     width: 80px;
@@ -43,14 +44,17 @@ padding: 0;
     background-color: #23553f;
   }
 #cardIdenti{
-    width: 330px;
-    height: 580px;
+    width: 400px;
+    height: 620px;
+    transform: rotate(5deg);
+    margin-top: -10px;
+    z-index: -2;
 }
 #identi{
   width: 100%;
   margin: 0;
   height: 50%;
-  background-image: url(../assets/identificación.svg);
+  background-image: url(../assets/identificacion3.svg);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -64,7 +68,7 @@ padding: 0;
   height: 50%;
   text-align: start;
     box-sizing: border-box;
-    margin-top: -30px;
+
   padding: 2em;
   border-end-end-radius: 1em;
     border-end-start-radius: 1em;

@@ -39,6 +39,7 @@ export default {
 nav{
   height: 100px;
   padding: 30px;
+  z-index: 100;
 }
     .home{
       display: flex;
