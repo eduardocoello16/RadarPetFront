@@ -16,8 +16,8 @@
       <div id="register" v-if="modo == 'register'">
       <form  @submit.prevent='registrarUsuario'>
       <h2>Registra tus datos</h2>
-         <label for="nombre">Nombre</label>
-        <input type="text" v-model='Nombre'  id="nombre" name="nombre" />
+         <label for="NombreUsuario">Nombre</label>
+        <input type="text" v-model='Nombre'  id="NombreUsuario" name="nombre" />
            <label for="apellido">Apellido</label>
         <input type="text" v-model='Apellido' id="apellido" name="apellido" />
         <label for="tel">Teléfono</label>
@@ -140,7 +140,7 @@ export default {
 
       const newPost = {
         nombre: this.Nombre,
-        Apellido: this.Apellido,
+        apellido: this.Apellido,
         email: this.Email,
         password: this.Password,
         telefono: this.telefono

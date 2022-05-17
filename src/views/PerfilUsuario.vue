@@ -1,29 +1,33 @@
 <template>
-<h2>Bienvenido {{user.nombre}}</h2>
-<p>Tu mail es {{user.email}}</p>
- <form  @submit.prevent='subirFoto'>
-   <div id="avatar"  :style="{ backgroundImage: 'url(' + imagen + ')' }" >
-     <div class="cover">
-     <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
-     </div>
-     </div>
-          <p>{{status}}</p>
-  <button id="enviar" type="submit">Enviar</button>
-</form>
+<div id="datosUsuario">
+<form  @submit.prevent='EditarUsuario'>
+      <h2>Bienvenido {{user.nombre}}</h2>
+         <label for="nombre">NombreUsuario</label>
+        <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
+           <label for="apellido">Apellido</label>
+        <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
+        <label for="tel">Teléfono</label>
+        <input type="text" v-model='user.telefono' id="tel" name="tel" />
+        <label for="email">Email</label>
+        <input type="text" v-model='user.email' id="mail" name="email" />
+        <label for="avatar">Avatar</label>
+         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
+        <button id="enviar">Actualizar Datos</button>
+        </form>
+        <section>
+        <CardIdentificacion :imagen="imagen" :Nombre="user.nombre" :Apellido="user.apellido" :Email="user.email" :Telefono="user.telefono" />
+        </section>
+        </div>
 <div v-for="mascota in mascotas" :key= "mascota.id">
   <CardMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"></CardMascota>
 </div>
 
 </template>
 <style scoped>
-#imagenup{
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  opacity: 0;
 
+#datosUsuario{
+  display: flex;
 }
-
 #enviar{
   background: black;
   color: whitesmoke;
@@ -53,16 +57,18 @@
 
 <script>
 import CardMascota from '../components/CardMascota.vue'
+import CardIdentificacion from '../components/CardIdentificacion.vue'
 export default {
   name: 'PerfilUsuario',
   components: {
-    CardMascota
+    CardMascota,
+    CardIdentificacion
   },
   data () {
     return {
-      user: '',
+      user: '', // obtengo el usuario de la store
       mascotas: [],
-      imagen: '',
+      imagen: this.$store.getters.getAvatar,
       status: ''
     }
   },
@@ -97,20 +103,23 @@ export default {
         })
     }
   },
-  mounted () {
-    fetch(`${process.env.VUE_APP_IP}usuario/getAvatar/`, {
-      method: 'GET',
-      headers: {
-        Key: this.$store.getters.getTokenSesion,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.blob())
-      .then(res => {
-        const imageObjectURL = URL.createObjectURL(res)
-        this.imagen = imageObjectURL
+  created () {
+    if (!this.$store.getters.getAvatar) {
+      fetch(`${process.env.VUE_APP_IP}usuario/getAvatar/`, {
+        method: 'GET',
+        headers: {
+          Key: this.$store.getters.getTokenSesion,
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
+        .then(response => response.blob())
+        .then(res => {
+          const imageObjectURL = URL.createObjectURL(res)
+          this.imagen = imageObjectURL
+        })
+    }
+
     fetch(`${process.env.VUE_APP_IP}usuario/getUsuario`, {
       method: 'GET',
       headers: {

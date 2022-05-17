@@ -53,6 +53,7 @@ export default createStore({
             context.commit('setUsuario', respuesta)
           })
       }
+      return true
     },
     setAvatarImage: (context) => {
       fetch(`${process.env.VUE_APP_IP}usuario/getAvatar/`, {

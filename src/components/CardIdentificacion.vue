@@ -3,7 +3,7 @@
         <div id="identi"></div>
         <div id="identiInfo">
           <div id="avatar"  :style= "{ backgroundImage: 'url(' + imagen + ')' }" ></div>
-          <div class="dato"> <label for="nombre">Nombre: </label><p>&nbsp; {{Nombre}}</p></div>
+          <div class="dato"> <label for="NombreUsuario">Nombre: </label><p>&nbsp; {{Nombre}}</p></div>
           <div class="dato"> <label for="apellido">Apellido: </label><p>&nbsp;{{Apellido}}</p></div>
           <div class="dato"> <label for="tel">Teléfono: </label><p>&nbsp;{{Telefono}}</p></div>
           <div class="dato"> <label for="mail">Email: </label><p>&nbsp;{{Email}}</p></div>
