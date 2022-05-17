@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+nav{
+  height: 100px;
+  padding: 30px;
+}
     .home{
       display: flex;
       justify-content: space-between;
