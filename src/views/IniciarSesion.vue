@@ -15,32 +15,24 @@
       </div>
       <div id="register" v-if="modo == 'register'">
       <form  @submit.prevent='registrarUsuario'>
-      <h2>Identificate</h2>
+      <h2>Registra tus datos</h2>
          <label for="nombre">Nombre</label>
-        <input type="text" v-model='Nombre' name="nombre" />
+        <input type="text" v-model='Nombre'  id="nombre" name="nombre" />
            <label for="apellido">Apellido</label>
         <input type="text" v-model='Apellido' id="apellido" name="apellido" />
         <label for="tel">Teléfono</label>
         <input type="text" v-model='telefono' id="tel" name="tel" />
         <label for="email">Email</label>
-        <input type="text" v-model='Email' name="email" />
+        <input type="text" v-model='Email' id="mail" name="email" />
         <label for="password">Contraseña</label>
         <input type="password" v-model='Password' name="password" />
         <label for="avatar">Avatar</label>
          <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
         <button id="enviar">Enviar</button>
         </form>
-        <div id="cardIdenti" >
-        <div id="identi"></div>
-        <div id="identiInfo">
-          <div id="avatar"  :style="{ backgroundImage: 'url(' + imagen + ')' }" ></div>
-        <p>Nombre: {{Nombre}}</p>
-        <p>Apellido: {{Apellido}}</p>
-        <p>Teléfono: {{telefono}}</p>
-        <p>Email: {{Email}}</p>
-        <p>Contraseña: {{Password}}</p>
-        </div>
-        </div>
+        <section>
+      <CardIdentificacion :imagen="imagen" :Nombre="Nombre" :Apellido="Apellido" :Email="Email" :Telefono="telefono" />
+        </section>
 </div>
   </div>
 </template>
@@ -55,21 +47,19 @@
     border-radius: 1em;
     background-color: #23553f;
   }
+  section{
+        width: 50%;
+  }
 #cardIdenti{
-  position: absolute;
-  top: 130px;
-  right: 200px;
-  z-index: -5;
-  width: 350px;
-  transform: rotate(5deg);
-
+    width: 330px;
+    height: 580px;
 }
 #identi{
-  width: 350px;
+  width: 100%;
   margin: 0;
-  height: 350px;
+  height: 50%;
   background-image: url(../assets/identificación.svg);
-  background-size: contain;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -78,8 +68,8 @@
   white-space: nowrap;
   background: rgb(224, 224, 224);
   margin-top: 0;
-  max-width: 350px;
-  height: 350px;
+  width: 100%;
+  height: 50%;
   text-align: start;
     box-sizing: border-box;
     margin-top: -30px;
@@ -96,7 +86,11 @@
   }
 </style>
 <script>
+import CardIdentificacion from '../components/CardIdentificacion.vue'
 export default {
+  components: {
+    CardIdentificacion
+  },
   data () {
     return {
       modo: 'login',
