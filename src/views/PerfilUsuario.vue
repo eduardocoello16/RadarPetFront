@@ -16,7 +16,7 @@
         <button id="enviar">Actualizar Datos</button>
         </form>
         <section>
-        <CardIdentificacion :imagen="imagen" :Nombre="user.nombre" :Apellido="user.apellido" :Email="user.email" :Telefono="user.telefono" />
+        <CardIdentificacion :imagen="imagen" :Usuario="user" />
         </section>
         </div>
 <div v-for="mascota in mascotas" :key= "mascota.id">

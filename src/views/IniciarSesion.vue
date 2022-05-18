@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 <template>
   <div class="pdsf">
     <form  v-if="modo == 'login'" @submit.prevent='iniciarSesion'>
@@ -102,7 +103,13 @@ export default {
     },
     registrarUsuario () {
       // Comprobar errores
-
+      // eslint-disable-next-line no-useless-escape
+      const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+      if (re.test(this.email)) {
+        console.log('email valido')
+      } else {
+        console.log('Email no valido')
+      }
       const newPost = this.user
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))
