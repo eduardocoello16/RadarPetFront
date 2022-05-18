@@ -46,18 +46,17 @@ font-size: 1em;
 #cardIdenti{
     width: 400px;
     height: 620px;
-    transform: rotate(5deg);
-    margin-top: -10px;
     z-index: -2;
 }
 #identi{
   width: 100%;
   margin: 0;
   height: 50%;
-  background-image: url(../assets/identificacion3.svg);
+  background-image: url(../assets/identificacion2.svg);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 #identiInfo{
   overflow: hidden;
