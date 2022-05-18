@@ -4,9 +4,9 @@
          <h2>Iniciar Sesión</h2>
           <p>{{errores}}</p>
       <label for="email">Email</label>
-      <input type="text" v-model='Email' name="email" />
+      <input type="text" v-model='email' name="email" />
       <label for="password">Contraseña</label>
-      <input type="password" v-model='Password' name="password" />
+      <input type="password" v-model='password' name="password" />
       <button id="enviar">Enviar</button>
       </form>
       <div v-if="modo == 'login'">
@@ -18,21 +18,21 @@
       <h2>Registra tus datos</h2>
        <p>{{errores}}</p>
          <label for="NombreUsuario">Nombre</label>
-        <input type="text" v-model='Nombre'  id="NombreUsuario" name="nombre" />
+        <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
            <label for="apellido">Apellido</label>
-        <input type="text" v-model='Apellido' id="apellido" name="apellido" />
+        <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
         <label for="tel">Teléfono</label>
-        <input type="text" v-model='telefono' id="tel" name="tel" />
+        <input type="text" v-model='user.telefono' id="tel" name="tel" />
         <label for="email">Email</label>
-        <input type="text" v-model='Email' id="mail" name="email" />
+        <input type="text" v-model='user.email' id="mail" name="email" />
         <label for="password">Contraseña</label>
-        <input type="password" v-model='Password' name="password" />
+        <input type="password" v-model='user.password' name="password" />
         <label for="avatar">Avatar</label>
          <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
         <button id="enviar">Enviar</button>
         </form>
         <section>
-      <CardIdentificacion :imagen="imagen" :Nombre="Nombre" :Apellido="Apellido" :Email="Email" :Telefono="telefono" />
+      <CardIdentificacion :imagen="imagen" :Usuario="user" />
         </section>
 </div>
   </div>
@@ -54,15 +54,19 @@ export default {
   },
   data () {
     return {
+      email: '',
+      password: '',
       modo: 'login',
-      Nombre: '',
-      Apellido: '',
-      telefono: '',
-      Email: '',
-      Password: '',
-      Password2: '',
       errores: '',
-      imagen: ''
+      imagen: '',
+      user: {
+        nombre: '',
+        apellido: '',
+        telefono: '',
+        email: '',
+        password: '',
+        password2: ''
+      }
     }
   },
   mounted () {
@@ -74,8 +78,8 @@ export default {
     },
     iniciarSesion () {
       const newPost = {
-        email: this.Email,
-        password: this.Password
+        email: this.email,
+        password: this.password
       }
       fetch(`${process.env.VUE_APP_IP}usuario/iniciarsesion`, {
         method: 'POST',
@@ -99,13 +103,7 @@ export default {
     registrarUsuario () {
       // Comprobar errores
 
-      const newPost = {
-        nombre: this.Nombre,
-        apellido: this.Apellido,
-        email: this.Email,
-        password: this.Password,
-        telefono: this.telefono
-      }
+      const newPost = this.user
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))
       formData.append('avatar', this.$refs.foto.files[0])
