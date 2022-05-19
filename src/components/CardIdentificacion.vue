@@ -43,6 +43,7 @@ font-size: 1em;
 #cardIdenti{
     width: 400px;
     height: 620px;
+    margin: 0 2em 0 4em;
     z-index: -2;
 }
 #identi{
@@ -62,6 +63,7 @@ font-size: 1em;
   margin-top: 0;
   width: 100%;
   height: 50%;
+  font-size: 0.9em;
   text-align: start;
     box-sizing: border-box;
 

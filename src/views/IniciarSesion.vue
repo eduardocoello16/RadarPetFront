@@ -1,13 +1,13 @@
 /* eslint-disable no-useless-escape */
 <template>
-  <div class="pdsf">
+  <div>
     <form  v-if="modo == 'login'" @submit.prevent='iniciarSesion'>
          <h2>Iniciar Sesión</h2>
-          <p>{{errores}}</p>
+          <p>{{errores.server}}</p>
       <label for="email">Email</label>
-      <input type="text" v-model='email' name="email" />
+      <input type="text" v-model='user.email' name="email" />
       <label for="password">Contraseña</label>
-      <input type="password" v-model='password' name="password" />
+      <input type="password" v-model='user.password' name="password" />
       <button id="enviar">Enviar</button>
       </form>
       <div v-if="modo == 'login'">
@@ -15,35 +15,61 @@
      <button  v-on:click="modo='register'">Registrarte</button>
       </div>
       <div id="register" v-if="modo == 'register'">
-      <form  @submit.prevent='registrarUsuario'>
-      <h2>Registra tus datos</h2>
-       <p>{{errores}}</p>
-         <label for="NombreUsuario">Nombre</label>
-        <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
-           <label for="apellido">Apellido</label>
-        <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
-        <label for="tel">Teléfono</label>
-        <input type="text" v-model='user.telefono' id="tel" name="tel" />
-        <label for="email">Email</label>
-        <input type="text" v-model='user.email' id="mail" name="email" />
-        <label for="password">Contraseña</label>
-        <input type="password" v-model='user.password' name="password" />
-        <label for="avatar">Avatar</label>
-         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
-        <button id="enviar">Enviar</button>
-        </form>
-        <section>
+                <section id="sectionidenti">
       <CardIdentificacion :imagen="imagen" :Usuario="user" />
         </section>
+        <section class="Formulario">
+      <form  @submit.prevent='comprobarDatos'>
+      <h2>Registra tus datos</h2>
+      <p>{{this.errores.passregex}}</p>
+         <label for="NombreUsuario">Nombre</label>
+        <input type="text" v-model='user.nombre'  id="NombreUsuario" />
+        <span>{{errores.nombre}}</span>
+           <label for="apellido">Apellidos</label>
+        <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
+         <span>{{errores.apellido}}</span>
+        <label for="tel">Teléfono</label>
+        <input type="text" v-model='user.telefono' id="tel" name="tel" />
+         <span>{{errores.telefono}}</span>
+        <label for="email">Email</label>
+        <input type="text" v-model='user.email' id="mail" name="registeremail" />
+          <span>{{errores.email}}</span>
+        <label for="password">Contraseña</label>
+        <input type="password" v-model='user.password' name="registerpassword" />
+              <label for="password">Repite la Contraseña</label>
+        <input type="password" v-model='password2' name="registerpassword2" />
+        <span>{{errores.password}}</span>
+        <label for="avatar">Avatar</label>
+         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
+          <span>{{errores.imagen}}</span>
+        <button id="enviar">Enviar</button>
+        </form>
+        </section>
+
 </div>
   </div>
 </template>
 <style>
- section{
-        width: 50%;
-  }
+input, label{
+  width: 100%;
+}
+form{
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: start;
+}
+span{
+  color: red;
+}
 #register{
   display: flex;
+  flex-wrap: wrap;
+}
+.Formulario{
+  width: 60%;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
@@ -55,18 +81,24 @@ export default {
   },
   data () {
     return {
-      email: '',
-      password: '',
+      password2: '',
       modo: 'login',
-      errores: '',
+      errores: {
+        passregex: '',
+        nombre: '',
+        apellido: '',
+        telefono: '',
+        email: '',
+        password: '',
+        server: ''
+      },
       imagen: '',
       user: {
         nombre: '',
         apellido: '',
         telefono: '',
         email: '',
-        password: '',
-        password2: ''
+        password: ''
       }
     }
   },
@@ -97,19 +129,63 @@ export default {
             this.$store.dispatch('setAvatarImage')
             this.$router.push('/')
           } else {
-            this.errores = respuesta.msg
+            this.errores.server = respuesta.msg
           }
         })
     },
-    registrarUsuario () {
-      // Comprobar errores
+    comprobarDatos () {
+      let error = false
+      this.errores.nombre = ''
+      this.errores.apellido = ''
+      this.errores.telefono = ''
+      this.errores.email = ''
+      this.errores.password = ''
+      this.errores.passregex = ''
+      this.errores.imagen = ''
+      // Validar Contraseña
+      const passregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,35}$/
+      if (!passregex.test(this.user.password)) {
+        this.errores.password = 'La contraseña no es segura'
+        this.errores.passregex = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial'
+        error = true
+      }
+      if (this.user.password !== this.password2) {
+        this.errores.password = 'Las contraseñas no coinciden'
+        error = true
+      }
       // eslint-disable-next-line no-useless-escape
       const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-      if (re.test(this.email)) {
-        console.log('email valido')
-      } else {
-        console.log('Email no valido')
+      if (!re.test(this.user.email)) {
+        this.errores.email = 'Email no válido'
+        error = true
       }
+      if (this.user.email > 40) {
+        this.errores.email = 'Email no válido'
+        error = true
+      }
+      // Validar nombre
+      if (this.user.nombre.length < 5) {
+        this.errores.nombre = 'Nombre vacío o muy corto'
+        error = true
+      }
+      if (this.user.nombre.length > 40) {
+        this.errores.nombre = 'Nombre demasiado largo'
+        error = true
+      }
+      // Validar Apellido
+      if (this.user.apellido.length < 5) {
+        this.errores.nombre = 'Apellido vacío o muy corto'
+        error = true
+      }
+      if (this.user.apellido.length > 40) {
+        this.errores.nombre = 'Apellido demasiado largo'
+        error = true
+      }
+      if (error === false) {
+        this.registrarUsuario()
+      }
+    },
+    registrarUsuario () {
       const newPost = this.user
       const formData = new FormData()
       formData.append('datos', JSON.stringify(newPost))
@@ -127,7 +203,7 @@ export default {
         })
         .then(respuesta => {
           if (respuesta) {
-            this.errores = respuesta.msg
+            this.errores.server = respuesta.msg
           }
         })
     }
