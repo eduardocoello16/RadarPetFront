@@ -21,6 +21,7 @@ body{
 }
 </style>
 <script>
+
 import NavHeadder from './components/NavHeadder.vue'
 export default {
   name: 'App',

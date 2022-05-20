@@ -1,25 +1,25 @@
 <template>
-<h1>Lista Mascotas:</h1>
+<h1>Lista Mascotass:</h1>
   <h2>Encontradas</h2>
   <section>
 <div id="encontradas" v-for="mascota in mascotasEncontradas" :key= "mascota.id">
-  <CardMascota :mascota="mascota"></CardMascota>
+  <MiniCard :mascota="mascota"></MiniCard>
 </div>
 </section>
   <h2>Perdidas</h2>
 <section>
 
 <div id="perdidas" v-for="mascota in mascotasPerdidas" :key= "mascota.id">
-  <CardMascota :mascota="mascota"></CardMascota>
+  <MiniCard :mascota="mascota"></MiniCard>
 </div>
 </section>
 </template>
 <script>
-import CardMascota from '../components/CardMascota.vue'
+import MiniCard from '../components/MiniCard.vue'
 export default {
   name: 'MascotasView',
   components: {
-    CardMascota
+    MiniCard
   },
   data () {
     return {

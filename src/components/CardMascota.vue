@@ -50,8 +50,8 @@
 </template>
 <style scoped>
 #foto{
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 300px;
   cursor: pointer;
 }
 </style>
