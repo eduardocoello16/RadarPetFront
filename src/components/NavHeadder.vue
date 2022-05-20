@@ -1,12 +1,11 @@
 <template>
   <nav class="home">
      <router-link to="/"> <h1>RadarPet</h1></router-link>
-     <div>
-       <router-link to="/perfil"  v-if="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
-      <router-link to="/perfil"> <p>{{nombreUsuario}}</p> </router-link>
+     <div id="datos">
     <router-link to="/nuevamascota"><button>Publicar mascota</button></router-link>
     <router-link v-if="token === ''" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
     <button @click="cerrarSesion" v-if="token !== ''">Cerrar Sesión</button>
+           <router-link to="/perfil"  v-if="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
     </div>
   </nav>
 </template>
@@ -36,6 +35,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#datos{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+}
 nav{
   height: 100px;
   padding: 30px;
@@ -46,7 +51,6 @@ nav{
       justify-content: space-between;
        padding: 30px;
     background-color: #2c3e50;
-    display: flex;
       a{
         font-weight: bold;
         color: #23553f;
@@ -65,6 +69,7 @@ nav{
     #avatar{
      width: 80px;
       height: 80px;
+      margin: 0 2em 0 2em;
       background-color: #23553f;
           background-size: cover;
     background-position: center;

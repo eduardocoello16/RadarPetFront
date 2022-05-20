@@ -19,13 +19,27 @@
         <CardIdentificacion :imagen="imagen" :Usuario="user" />
         </section>
         </div>
-<div v-for="mascota in mascotas" :key= "mascota.id">
+      <div id="mascotasList">
+<div  v-for="mascota in mascotas" :key= "mascota.id">
   <CardMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"></CardMascota>
+</div>
 </div>
 
 </template>
 <style scoped>
-
+#mascotasList{
+  margin: 2em;
+  margin-top: 5em;
+}
+input, label{
+  width: 100%;
+}
+form{
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: start;
+}
 #datosUsuario{
   display: flex;
 }

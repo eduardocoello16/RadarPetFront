@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 <template>
-  <div>
-    <form  v-if="modo == 'login'" @submit.prevent='iniciarSesion'>
+<div v-if="modo == 'login'" id="loginmode">
+    <form   @submit.prevent='iniciarSesion'>
          <h2>Iniciar Sesión</h2>
           <p>{{errores.server}}</p>
       <label for="email">Email</label>
@@ -13,6 +13,7 @@
       <div v-if="modo == 'login'">
           <p>¿No tienes cuenta?</p>
      <button  v-on:click="modo='register'">Registrarte</button>
+      </div>
       </div>
       <div id="register" v-if="modo == 'register'">
                 <section id="sectionidenti">
@@ -47,9 +48,14 @@
         </section>
 
 </div>
-  </div>
 </template>
-<style>
+<style scoped>
+#loginmode{
+  background-color: #23553f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 input, label{
   width: 100%;
 }
@@ -111,8 +117,8 @@ export default {
     },
     iniciarSesion () {
       const newPost = {
-        email: this.email,
-        password: this.password
+        email: this.user.email,
+        password: this.user.password
       }
       fetch(`${process.env.VUE_APP_IP}usuario/iniciarsesion`, {
         method: 'POST',
@@ -143,7 +149,7 @@ export default {
       this.errores.passregex = ''
       this.errores.imagen = ''
       // Validar Contraseña
-      const passregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,35}$/
+      const passregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
       if (!passregex.test(this.user.password)) {
         this.errores.password = 'La contraseña no es segura'
         this.errores.passregex = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial'

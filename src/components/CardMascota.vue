@@ -1,51 +1,52 @@
 <template>
-    <h2>Tu mascota</h2>
-    <p>Nombre: {{this.Nombre}}</p>
-    <p>Tipo: {{this.Tipo}}</p>
-    <p> Raza: {{this.Raza}}</p>
-    <p> Edad: {{this.Edad}}</p>
-    <p>Peso: {{this.Peso}}</p>
-    <p> Contacto: {{this.Contacto}}</p>
-    <p>Descripcion: {{this.Descripcion}}</p>
-    <p> Ubicacion: {{this.Ubicacion}}</p>
+  <div id="Card">
+    <div id="cardMascota" :class="{ cardMascotaPropiedad: propiedad == true }">
       <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
-      <div v-if="propiedad == true">
-        <div v-if="this.isCaducada == true">
+      <p>Nombre: {{this.Nombre}}</p>
+      <p>Tipo: {{this.Tipo}}</p>
+      <p> Raza: {{this.Raza}}</p>
+      <p> Edad: {{this.Edad}}</p>
+      <p>Peso: {{this.Peso}}</p>
+      <p> Contacto: {{this.Contacto}}</p>
+    </div>
+    <div class="cardForm"  v-if="propiedad == true">
+      <div v-if="this.isCaducada == true">
         <p>Mascota Caducada, si quiere volver a activarla otros 3 meses pulsa aquí</p>
         <button @click="activarMascota">Activar Mascota</button>
-        </div>
-        <div v-else>
-        <form  @submit.prevent='editarMascota'>
-          <label for="Nombre">Nombre</label>
-          <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
-          <label for="Raza">Raza</label>
-          <input type="text" v-model="Raza" id="raza" placeholder="Raza">
-          <label for="tipo">Tipo</label>
-          <select name="tipo" id="tipo"  v-model="Tipo" >
+      </div>
+      <div v-else>
+      <form  @submit.prevent='editarMascota'>
+        <label for="Nombre">Nombre</label>
+        <input type="text" v-model="Nombre" id="nombre"  placeholder="Nombre">
+        <label for="Raza">Raza</label>
+        <input type="text" v-model="Raza" id="raza" placeholder="Raza">
+        <label for="tipo">Tipo</label>
+        <select name="tipo" id="tipo"  v-model="Tipo" >
             <option value="Perro">Perro</option>
             <option value="Gato">Gato</option>
-          </select>
-          <label for="contacto">Contacto</label>
-           <select name="contacto" id="contacto"  v-model="Tipocontacto" >
-            <option value="tel">Teléfono</option>
-            <option value="mail">E-mail</option>
-          </select>
-          <label for="Peso">Peso</label>
-          <input type="number" v-model="Peso" id="peso" placeholder="Peso">
-          <label for="Edad">Edad</label>
-          <input type="number" v-model="Edad" id="edad" placeholder="Edad">
-           <label for="descripcion">Descripción</label>
-      <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
-          <label for="Ubicacion">Ubicacion</label>
-          <input type="text" v-model="Ubicacion" id="ubicacion" placeholder="Ubicacion">
-    <label for="fotoMascota">Foto Mascota</label>
-     <input @change="onFileMascotaSelected" type="file" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
-     <button type="submit">Guardar</button>
-  </form>
-        </div>
-      <button @click="borrarMascota">Borrar</button>
-      <p>{{this.status}}</p>
-      </div>
+        </select>
+        <label for="contacto">Contacto</label>
+        <select name="contacto" id="contacto"  v-model="Tipocontacto" >
+          <option value="tel">Teléfono</option>
+          <option value="mail">E-mail</option>
+        </select>
+        <label for="Peso">Peso</label>
+        <input type="number" v-model="Peso" id="peso" placeholder="Peso">
+        <label for="Edad">Edad</label>
+        <input type="number" v-model="Edad" id="edad" placeholder="Edad">
+        <label for="descripcion">Descripción</label>
+        <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
+        <label for="Ubicacion">Ubicacion</label>
+        <input type="text" v-model="Ubicacion" id="ubicacion" placeholder="Ubicacion">
+        <label for="fotoMascota">Foto Mascota</label>
+        <input @change="onFileMascotaSelected" type="file" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+    <button @click="borrarMascota">Borrar</button>
+    <p>{{this.status}}</p>
+  </div> <!-- Cierre Propiedad = true -->
+</div>  <!-- Cierre Card -->
 </template>
 <style scoped>
 #foto{
@@ -169,6 +170,39 @@ export default {
 </script>
 
 <style scoped>
+#Card{
+  display: flex;
+  justify-content: space-around;
+
+}
+#cardMascota{
+  width: 400px;
+    white-space: normal;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 0px 10px #000;
+}
+.cardMascotaPropiedad{
+  width: 50%;
+}
+.cardForm{
+  margin-left: 10px;
+  width: 50%;
+}
+input, label{
+  width: 100%;
+}
+form{
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: start;
+}
 .caducada{
    -webkit-filter: grayscale(1); /* Webkit */
     filter: gray; /* IE6-9 */
