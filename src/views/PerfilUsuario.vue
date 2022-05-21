@@ -71,7 +71,7 @@ form{
 </style>
 
 <script>
-import CardMascota from '../components/CardMascota.vue'
+import CardMascota from '../components/CardEditMascota.vue'
 import CardIdentificacion from '../components/CardIdentificacion.vue'
 export default {
   name: 'PerfilUsuario',

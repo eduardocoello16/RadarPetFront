@@ -1,29 +1,31 @@
 <template>
 <h1>Lista Mascotass:</h1>
   <h2>Encontradas</h2>
-  <section>
-<div id="encontradas" v-for="mascota in mascotasEncontradas" :key= "mascota.id">
-  <MiniCard :mascota="mascota"></MiniCard>
+  <section id="encontradas">
+<div  v-for="mascota in randomEncontradas" :key= "mascota.id">
+  <CardMascota :mascota="mascota"/>
 </div>
 </section>
   <h2>Perdidas</h2>
-<section>
+<section id="perdidas">
 
-<div id="perdidas" v-for="mascota in mascotasPerdidas" :key= "mascota.id">
-  <MiniCard :mascota="mascota"></MiniCard>
+<div  v-for="mascota in mascotasPerdidas" :key= "mascota.id">
+  <CardMascota  :mascota="mascota"/>
 </div>
 </section>
 </template>
 <script>
-import MiniCard from '../components/MiniCard.vue'
+import CardMascota from '../components/CardMascota.vue'
 export default {
   name: 'MascotasView',
   components: {
-    MiniCard
+    CardMascota
   },
   data () {
     return {
       mascotas: [],
+      randomEncontradas: [],
+      randomPerdidas: [],
       mascotasEncontradas: [],
       mascotasPerdidas: []
     }
@@ -43,20 +45,21 @@ export default {
         this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdido')
         this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
       })
+      .then(() => {
+        // Obtener 4 mascotas aleatorias del array de mascotas encontradas
+        this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, 4)
+        this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, 4)
+      })
   }
 }
 </script>
 <style scoped>
 section{
   display: flex;
-  overflow-x: auto;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+
 }
-#encontradas{
-  background-color: #c34444;
-}
-#perdidas{
-  background-color: #2485a0;
-}
+
 </style>

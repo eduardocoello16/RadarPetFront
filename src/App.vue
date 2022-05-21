@@ -1,4 +1,7 @@
 <template>
+<header>
+  <meta name="viewport" content= "width=device-width, user-scalable=no">
+</header>
   <NavHeadder/>
   <router-view/>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <nav class="home">
-     <router-link to="/"> <h1>RadarPet</h1></router-link>
+    <a>  <router-link to="/"> <h1>RadarPet</h1></router-link></a>
      <div id="datos">
     <router-link to="/nuevamascota"><button>Publicar mascota</button></router-link>
-    <router-link v-if="token === ''" to="/iniciarsesion"><button>Iniciar Sesión</button></router-link>
-    <button @click="cerrarSesion" v-if="token !== ''">Cerrar Sesión</button>
-           <router-link to="/perfil"  v-if="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
+    <router-link v-if="token === ''" to="/iniciarsesion"><button class="Sesion"></button></router-link>
+   <div> <button  class="Sesion" @click="cerrarSesion" v-if="token !== ''">s</button></div>
+    <router-link to="/perfil"  v-show="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
     </div>
   </nav>
 </template>
@@ -35,19 +35,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a{
+  width: 100%;
+}
+h1{
+  color: #fff;
+  font-size: 2em;
+  font-weight: bold;
+
+  padding: 0;
+  width: 100%;
+}
 #datos{
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 10px;
 }
-nav{
-  height: 100px;
+
+nav.home{
+
   padding: 30px;
   z-index: 100;
-}
-    .home{
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
        padding: 30px;
     background-color: #2c3e50;
@@ -60,20 +71,24 @@ nav{
       }
       }
       div{
-        margin-right: 5em;
+        margin-right: 0.1em;
         button{
           margin: 0.5em;
         }
       }
     }
     #avatar{
-     width: 80px;
-      height: 80px;
-      margin: 0 2em 0 2em;
-      background-color: #23553f;
+     width: 50px;
+      height: 50px;
+      margin: 0 1em 0 1em;
           background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
         border-radius: 1em;
     }
+    .Sesion{
+  width: 50px;
+  height: 50px;
+  background-color: #23553f;
+}
 </style>
