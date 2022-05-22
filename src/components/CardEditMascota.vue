@@ -2,12 +2,12 @@
   <div id="Card">
     <div id="cardMascota" :class="{ cardMascotaPropiedad: propiedad == true }">
       <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
-      <p>Nombre: {{datosMascota.Nombre}}</p>
-      <p>Tipo: {{datosMascota.Tipo}}</p>
-      <p> Raza: {{datosMascota.Raza}}</p>
-      <p> Edad: {{datosMascota.Edad}}</p>
-      <p>Peso: {{datosMascota.Peso}}</p>
-      <p> Contacto: {{datosMascota.Contacto}}</p>
+      <div class="dato">  <p>Nombre: {{datosMascota.Nombre}}</p></div>
+      <div class="dato">  <p>Tipo: {{datosMascota.Tipo}}</p></div>
+     <div class="dato">   <p> Raza: {{datosMascota.Raza}}</p></div>
+     <div class="dato">   <p> Edad: {{datosMascota.Edad}}</p></div>
+     <div class="dato">   <p>Peso: {{datosMascota.Peso}}</p></div>
+    <div class="dato">    <p> Contacto: {{datosMascota.Contacto}}</p></div>
     </div>
     <div class="cardForm"  v-if="propiedad == true">
       <div v-if="this.isCaducada == true">
@@ -48,13 +48,6 @@
   </div> <!-- Cierre Propiedad = true -->
 </div>  <!-- Cierre Card -->
 </template>
-<style scoped>
-#foto{
-  width: 100%;
-  height: 300px;
-  cursor: pointer;
-}
-</style>
 <script>
 export default {
   name: 'CardMascota',
@@ -147,27 +140,31 @@ export default {
       }
     }
   }
-
 }
 </script>
-
-<style scoped>
+<style scoped lang="scss">
 #Card{
   display: flex;
   justify-content: space-around;
 
 }
 #cardMascota{
-  width: 400px;
+  width: 120px;
     white-space: normal;
   margin: 10px;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 10px;
   box-shadow: 0px 0px 10px #000;
+}
+#cardMascota > .dato{
+  width: 100%;
+  margin: 0;
+}
+#cardMascota  *{
+
+  margin: 0;
 }
 .cardMascotaPropiedad{
   width: 50%;
@@ -189,5 +186,10 @@ form{
    -webkit-filter: grayscale(1); /* Webkit */
     filter: gray; /* IE6-9 */
     filter: grayscale(1); /* W3C */
+}
+#foto{
+  width: 100%;
+  height: 120px;
+  cursor: pointer;
 }
 </style>

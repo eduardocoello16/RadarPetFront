@@ -1,12 +1,13 @@
 <template>
   <nav class="home">
-    <a>  <router-link to="/"> <h1>RadarPet</h1></router-link></a>
      <div id="datos">
-    <router-link to="/nuevamascota"><button>Publicar mascota</button></router-link>
-    <router-link v-if="token === ''" to="/iniciarsesion"><button class="Sesion"></button></router-link>
-   <div> <button  class="Sesion" @click="cerrarSesion" v-if="token !== ''">s</button></div>
-    <router-link to="/perfil"  v-show="obtener != ''">    <div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div></router-link>
+     <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link>
+     <router-link to="/"> <h1>RadarPet</h1></router-link>
+ <router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
+ <a  v-if="token !== ''"><button  class="Sesion" @click="cerrarSesion"><img src="../assets/right-to-bracket-solid.svg" alt=""></button></a>
+
     </div>
+      <router-link to="/nuevamascota"> <button id="publicar">Publicar mascota</button></router-link>
   </nav>
 </template>
 
@@ -35,19 +36,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a{
-  width: 100%;
+#perfil:hover{
+  background-color: #f0f0f0;
+  border-radius: 2em;
+}
+#nombreUsuario{
+  font-size: 0.8em;
+  margin: 0;
 }
 h1{
-  color: #fff;
+  color: rgb(24, 24, 24);
   font-size: 2em;
   font-weight: bold;
-
   padding: 0;
-  width: 100%;
 }
 #datos{
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-right: 10px;
@@ -55,13 +61,12 @@ h1{
 
 nav.home{
 
-  padding: 30px;
+  padding: 1em 0 1em 0;
   z-index: 100;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-       padding: 30px;
-    background-color: #2c3e50;
+      justify-content: space-around;
+
       a{
         font-weight: bold;
         color: #23553f;
@@ -78,17 +83,36 @@ nav.home{
       }
     }
     #avatar{
-     width: 50px;
-      height: 50px;
+     width: 3em;
+      height: 3em;
       margin: 0 1em 0 1em;
-          background-size: cover;
-    background-position: center;
+      background-size: cover;
+      background-position: center;
     background-repeat: no-repeat;
         border-radius: 1em;
     }
     .Sesion{
-  width: 50px;
-  height: 50px;
+  width: 2.5em;
+  height: 2.5em;
+}
+button{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+button:hover{
+  background-color: #f0f0f0;
+  border-radius: 1em;
+}
+#publicar{
+  padding: 1em;
   background-color: #23553f;
+  color: white;
+  font-weight: bold;
+  border-radius: 1em;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 </style>

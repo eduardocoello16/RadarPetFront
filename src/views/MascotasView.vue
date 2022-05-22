@@ -1,16 +1,16 @@
 <template>
 <h1>Lista Mascotass:</h1>
-  <h2>Encontradas</h2>
-  <section id="encontradas">
-<div  v-for="mascota in randomEncontradas" :key= "mascota.id">
-  <CardMascota :mascota="mascota"/>
-</div>
-</section>
   <h2>Perdidas</h2>
 <section id="perdidas">
 
 <div  v-for="mascota in mascotasPerdidas" :key= "mascota.id">
   <CardMascota  :mascota="mascota"/>
+</div>
+</section>
+ <h2>Encontradas</h2>
+  <section id="encontradas">
+<div  v-for="mascota in randomEncontradas" :key= "mascota.id">
+  <CardMascota :mascota="mascota"/>
 </div>
 </section>
 </template>
@@ -59,6 +59,7 @@ section{
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  padding: 2em;
 
 }
 

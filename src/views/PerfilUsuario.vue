@@ -1,9 +1,10 @@
 <template>
 <div id="datosUsuario">
+  <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
 <form  @submit.prevent='EditarUsuario'>
       <h2>Bienvenido {{datoUsuario.nombre}}</h2>
       <p>{{editUserStatus}}</p>
-         <label for="nombre">NombreUsuario</label>
+         <label for="NombreUsuario">NombreUsuario</label>
         <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
            <label for="apellido">Apellido</label>
         <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
@@ -16,7 +17,6 @@
         <button id="enviar">Actualizar Datos</button>
         </form>
         <section>
-        <CardIdentificacion :imagen="imagen" :Usuario="user" />
         </section>
         </div>
       <div id="mascotasList">
@@ -27,6 +27,9 @@
 
 </template>
 <style scoped>
+.hiddenOnMovile{
+  display: none;
+}
 #mascotasList{
   margin: 2em;
   margin-top: 5em;
@@ -42,11 +45,13 @@ form{
 }
 #datosUsuario{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 #enviar{
-  background: black;
+  background: #23553f;
   color: whitesmoke;
-  margin: 1.5em;
+  margin-top: 1.5em;
   border: none;
   font-size: 2em;
 }

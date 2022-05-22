@@ -51,7 +51,7 @@
 </template>
 <style scoped>
 #loginmode{
-  background-color: #23553f;
+
   display: flex;
   justify-content: center;
   align-items: center;
