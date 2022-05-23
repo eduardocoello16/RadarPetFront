@@ -1,5 +1,5 @@
 <template>
-    <div id="cardMascota" :class=" {completa: completa}">
+    <div id="cardMascota">
       <img :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
       <p> {{mascota.Nombre}}</p>
       <p v-if="completa && mascota.Raza">Raza: {{mascota.Raza}}</p>
@@ -17,12 +17,12 @@
 
 #foto{
   width: 100%;
-  height: 120px;
+  height: 320px;
   cursor: pointer;
 }
 
 #cardMascota{
-  width: 120px;
+  width: 100%;
     white-space: normal;
     overflow: hidden;
   margin: 10px;
@@ -32,13 +32,10 @@
   align-items: center;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
 }
-.completa{
-  width: 500px;
-}
 </style>
 <script>
 export default {
-  name: 'CardMascota',
+  name: 'CardMascotaCompleta',
   props: {
     mascota: Object,
     completa: Boolean

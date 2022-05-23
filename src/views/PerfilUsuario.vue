@@ -33,6 +33,10 @@
 #mascotasList{
   margin: 2em;
   margin-top: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 input, label{
   width: 100%;
@@ -76,7 +80,7 @@ form{
 </style>
 
 <script>
-import CardMascota from '../components/CardEditMascota.vue'
+import CardMascota from '../components/EditMascota.vue'
 import CardIdentificacion from '../components/CardIdentificacion.vue'
 export default {
   name: 'PerfilUsuario',

@@ -3,7 +3,7 @@
   <h2>Perdidas</h2>
 <section id="perdidas">
 
-<div  v-for="mascota in mascotasPerdidas" :key= "mascota.id">
+<div  v-for="mascota in randomPerdidas" :key= "mascota.id">
   <CardMascota  :mascota="mascota"/>
 </div>
 </section>
@@ -48,6 +48,7 @@ export default {
       .then(() => {
         // Obtener 4 mascotas aleatorias del array de mascotas encontradas
         this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, 4)
+        console.log(this.randomEncontradas)
         this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, 4)
       })
   }

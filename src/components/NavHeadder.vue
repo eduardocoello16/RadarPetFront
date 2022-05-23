@@ -60,7 +60,10 @@ h1{
 }
 
 nav.home{
-
+  background-color: rgba(255, 255, 255, 0.990);
+  position: sticky;
+  width: 100%;
+  top: 0;
   padding: 1em 0 1em 0;
   z-index: 100;
       display: flex;

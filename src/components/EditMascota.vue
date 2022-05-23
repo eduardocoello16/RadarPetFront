@@ -1,14 +1,6 @@
 <template>
-  <div id="Card">
-    <div id="cardMascota" :class="{ cardMascotaPropiedad: propiedad == true }">
-      <img :class="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
-      <div class="dato">  <p>Nombre: {{datosMascota.Nombre}}</p></div>
-      <div class="dato">  <p>Tipo: {{datosMascota.Tipo}}</p></div>
-     <div class="dato">   <p> Raza: {{datosMascota.Raza}}</p></div>
-     <div class="dato">   <p> Edad: {{datosMascota.Edad}}</p></div>
-     <div class="dato">   <p>Peso: {{datosMascota.Peso}}</p></div>
-    <div class="dato">    <p> Contacto: {{datosMascota.Contacto}}</p></div>
-    </div>
+<div id="Card">
+      <img :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
     <div class="cardForm"  v-if="propiedad == true">
       <div v-if="this.isCaducada == true">
         <p>Mascota Caducada, si quiere volver a activarla otros 3 meses pulsa aquí</p>
@@ -50,7 +42,7 @@
 </template>
 <script>
 export default {
-  name: 'CardMascota',
+  name: 'EditMascota',
   props: {
     propiedad: {
       type: Boolean,
@@ -143,41 +135,33 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-#Card{
-  display: flex;
-  justify-content: space-around;
-
+#descripcion{
+  width: 100%;
+ resize: none;
 }
-#cardMascota{
-  width: 120px;
+#info{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+#Card{
+  margin: 2em;
     white-space: normal;
-  margin: 10px;
+    overflow: hidden;
   border-radius: 10px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 10px #000;
-}
-#cardMascota > .dato{
-  width: 100%;
-  margin: 0;
-}
-#cardMascota  *{
-
-  margin: 0;
-}
-.cardMascotaPropiedad{
-  width: 50%;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
 }
 .cardForm{
   margin-left: 10px;
-  width: 50%;
+  width: 100%;
 }
 input, label{
   width: 100%;
 }
 form{
-  width: 40%;
   display: flex;
   flex-wrap: wrap;
   text-align: start;
@@ -189,7 +173,7 @@ form{
 }
 #foto{
   width: 100%;
-  height: 120px;
+  height: auto;
   cursor: pointer;
 }
 </style>
