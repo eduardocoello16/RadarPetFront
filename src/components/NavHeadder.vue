@@ -3,7 +3,9 @@
      <div id="datos">
    <div class="buttons">  <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link></div>
      <router-link to="/"> <h1>RadarPet</h1></router-link>
-     <div class="buttons"><router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
+     <div class="buttons">
+     <button  class="Sesion">  <img class="modooscuro" src="../assets/luna.png" alt=""></button>
+       <router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
  <a  v-if="token !== ''"><button  class="Sesion" @click="cerrarSesion"><img src="../assets/right-to-bracket-solid.svg" alt=""></button></a></div>
 
     </div>
@@ -84,6 +86,7 @@ nav.home{
   flex-wrap: wrap;
   justify-content: center;
    width: 3em;
+     background-color: #f0f0f0;
       height: 3em;
 }
     #avatar{
@@ -98,6 +101,11 @@ nav.home{
     .Sesion{
   width: 2em;
   height: 2em;
+}
+.modooscuro{
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
 }
 button{
   border: none;
