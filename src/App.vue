@@ -6,7 +6,7 @@
   <router-view/>
 </template>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,800&display=swap');
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,9 +18,25 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
 }
+
+.tema {
+
+    --color__primary: rgb(253, 253, 253);
+     --color__text: rgb(5, 12, 19);
+       --color__hover: rgba(226, 226, 226, 0.986);
+
+    &-dark {
+        --color__primary: rgb(5, 12, 19);
+         --color__text: rgb(252, 252, 252);
+          --color__hover: rgba(31, 31, 31, 0.801);
+    }
+}
 body{
   margin: 0;
   overflow-x: hidden;
+  background-color: var(--color__primary);
+  color: var(--color__text);
+  transition: all 0.5s ease;
 }
 </style>
 <script>
@@ -30,6 +46,9 @@ export default {
   name: 'App',
   components: {
     NavHeadder
+  },
+  mounted () {
+    document.body.classList.add('tema')
   }
 }
 </script>

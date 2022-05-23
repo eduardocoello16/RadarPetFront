@@ -1,10 +1,10 @@
 <template>
   <nav class="home">
      <div id="datos">
-   <div class="buttons">  <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link></div>
+ <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link>
      <router-link to="/"> <h1>RadarPet</h1></router-link>
-     <div class="buttons">
-     <button  class="Sesion">  <img class="modooscuro" src="../assets/luna.png" alt=""></button>
+     <div >
+     <button @click="switchTema" class="Sesion">  <img src="../assets/moon.svg" alt=""></button>
        <router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
  <a  v-if="token !== ''"><button  class="Sesion" @click="cerrarSesion"><img src="../assets/right-to-bracket-solid.svg" alt=""></button></a></div>
 
@@ -20,6 +20,9 @@ export default {
     cerrarSesion () {
       this.$store.dispatch('cerrarSesion')
       this.$router.push('/')
+    },
+    switchTema () {
+      document.body.classList.toggle('tema-dark')
     }
   },
   computed: {
@@ -39,15 +42,18 @@ export default {
 
 <style lang="scss" scoped>
 #perfil:hover{
-  background-color: #f0f0f0;
+    background-color: var(--color__hover);
   border-radius: 2em;
+}
+#perfil{
+    margin-right: 2em;
 }
 #nombreUsuario{
   font-size: 0.6em;
   margin: 0;
 }
 h1{
-  color: rgb(24, 24, 24);
+  color: var(--color__text);
   font-size: 1.5em;
   font-weight: bold;
   padding: 0;
@@ -62,7 +68,8 @@ h1{
 }
 
 nav.home{
-  background-color: rgba(255, 255, 255, 0.980);
+  background-color: var(--color__primary);
+  color: var(--color__text);
   position: sticky;
   width: 100%;
   top: 0;
@@ -74,24 +81,17 @@ nav.home{
 
       a{
         font-weight: bold;
-        color: #23553f;
+          color: var(--color__text);
         text-decoration: none;
           &.router-link-exact-active {
-        color: #42b983;
+          color: var(--color__text);
       }
       }
     }
-.buttons{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-   width: 3em;
-     background-color: #f0f0f0;
-      height: 3em;
-}
+
     #avatar{
-     width: 1.5em;
-      height: 1.5em;
+     width: 3em;
+      height: 3em;
       margin: 0 1em 0 1em;
       background-size: cover;
       background-position: center;
@@ -99,8 +99,9 @@ nav.home{
         border-radius: 1em;
     }
     .Sesion{
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
+  margin-right: 1em;
 }
 .modooscuro{
   width: 1.5em;
@@ -114,7 +115,7 @@ button{
   cursor: pointer;
 }
 button:hover{
-  background-color: #f0f0f0;
+  background-color: var(--color__hover);
   border-radius: 1em;
 }
 #publicar{
