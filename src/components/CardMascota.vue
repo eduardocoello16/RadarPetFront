@@ -1,6 +1,6 @@
 <template>
     <div id="cardMascota" :class=" {completa: completa}">
-      <img :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
+      <img id="foto" :src="imagen" alt="">
       <p> {{mascota.Nombre}}</p>
       <p v-if="completa && mascota.Raza">Raza: {{mascota.Raza}}</p>
       <p v-if="completa && mascota.Tipo">Raza: {{mascota.Tipo}}</p>

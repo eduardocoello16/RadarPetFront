@@ -58,6 +58,7 @@ form{
   margin-top: 1.5em;
   border: none;
   font-size: 2em;
+  border-radius: 10px;
 }
   #avatar{
     width: 200px;
@@ -90,7 +91,7 @@ export default {
   },
   data () {
     return {
-      user: '', // obtengo el usuario de la store
+      user: this.$store.getters.getUsuario, // obtengo el usuario de la store
       mascotas: [],
       imagen: this.$store.getters.getAvatar,
       status: '',

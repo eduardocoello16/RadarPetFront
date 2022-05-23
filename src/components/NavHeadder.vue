@@ -1,10 +1,10 @@
 <template>
   <nav class="home">
      <div id="datos">
-     <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link>
+   <div class="buttons">  <router-link to="/perfil" id="perfil"><div id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div> <p id="nombreUsuario">{{nombreUsuario}}</p></router-link></div>
      <router-link to="/"> <h1>RadarPet</h1></router-link>
- <router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
- <a  v-if="token !== ''"><button  class="Sesion" @click="cerrarSesion"><img src="../assets/right-to-bracket-solid.svg" alt=""></button></a>
+     <div class="buttons"><router-link  to="/iniciarsesion" v-if="token === ''"> <button  class="Sesion"><img src="../assets/user-solid.svg" alt=""></button></router-link>
+ <a  v-if="token !== ''"><button  class="Sesion" @click="cerrarSesion"><img src="../assets/right-to-bracket-solid.svg" alt=""></button></a></div>
 
     </div>
       <router-link to="/nuevamascota"> <button id="publicar">Publicar mascota</button></router-link>
@@ -41,12 +41,12 @@ export default {
   border-radius: 2em;
 }
 #nombreUsuario{
-  font-size: 0.8em;
+  font-size: 0.6em;
   margin: 0;
 }
 h1{
   color: rgb(24, 24, 24);
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   padding: 0;
 }
@@ -56,15 +56,15 @@ h1{
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-right: 10px;
+  padding: 0 1em 0 1em;
 }
 
 nav.home{
-  background-color: rgba(255, 255, 255, 0.990);
+  background-color: rgba(255, 255, 255, 0.980);
   position: sticky;
   width: 100%;
   top: 0;
-  padding: 1em 0 1em 0;
+  padding-bottom: 1em ;
   z-index: 100;
       display: flex;
       flex-wrap: wrap;
@@ -78,16 +78,17 @@ nav.home{
         color: #42b983;
       }
       }
-      div{
-        margin-right: 0.1em;
-        button{
-          margin: 0.5em;
-        }
-      }
     }
-    #avatar{
-     width: 3em;
+.buttons{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+   width: 3em;
       height: 3em;
+}
+    #avatar{
+     width: 1.5em;
+      height: 1.5em;
       margin: 0 1em 0 1em;
       background-size: cover;
       background-position: center;
@@ -95,8 +96,8 @@ nav.home{
         border-radius: 1em;
     }
     .Sesion{
-  width: 2.5em;
-  height: 2.5em;
+  width: 2em;
+  height: 2em;
 }
 button{
   border: none;
@@ -109,10 +110,11 @@ button:hover{
   border-radius: 1em;
 }
 #publicar{
-  padding: 1em;
+  padding:  0.8em;
   background-color: #23553f;
   color: white;
   font-weight: bold;
+  font-size: 0.8em;
   border-radius: 1em;
   border: none;
   outline: none;
