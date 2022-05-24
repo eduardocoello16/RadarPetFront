@@ -22,21 +22,25 @@
 .tema {
 
     --color__primary: rgb(253, 253, 253);
+    --color__headder: rgba(253, 253, 253, 0.975);
      --color__text: rgb(5, 12, 19);
        --color__hover: rgba(226, 226, 226, 0.986);
 
     &-dark {
-        --color__primary: rgb(5, 12, 19);
+        --color__primary: rgb(17, 33, 49);
+            --color__headder: rgba(17, 33, 49, 0.956);
          --color__text: rgb(252, 252, 252);
           --color__hover: rgba(31, 31, 31, 0.801);
     }
+}
+*{
+  transition: background-color 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 body{
   margin: 0;
   overflow-x: hidden;
   background-color: var(--color__primary);
   color: var(--color__text);
-  transition: all 0.5s ease;
 }
 </style>
 <script>

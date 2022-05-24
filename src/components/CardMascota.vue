@@ -17,12 +17,12 @@
 
 #foto{
   width: 100%;
-  height: 120px;
+  height: auto;
   cursor: pointer;
 }
 
 #cardMascota{
-  width: 120px;
+
     white-space: normal;
     overflow: hidden;
   margin: 10px;
@@ -30,11 +30,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+  color: black;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
 }
-.completa{
-  width: 500px;
-}
+
 </style>
 <script>
 export default {

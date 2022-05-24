@@ -3,13 +3,13 @@
   <h2>Perdidas</h2>
 <section id="perdidas">
 
-<div  v-for="mascota in randomPerdidas" :key= "mascota.id">
+<div  class="mascotaCard" v-for="mascota in randomPerdidas" :key= "mascota.id">
   <CardMascota  :mascota="mascota"/>
 </div>
 </section>
  <h2>Encontradas</h2>
   <section id="encontradas">
-<div  v-for="mascota in randomEncontradas" :key= "mascota.id">
+<div   class="mascotaCard"  v-for="mascota in randomEncontradas" :key= "mascota.id">
   <CardMascota :mascota="mascota"/>
 </div>
 </section>
@@ -46,22 +46,45 @@ export default {
         this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
       })
       .then(() => {
+        let cantidad
+        if (screen.width > 800) {
+          cantidad = 8
+        } else {
+          cantidad = 4
+        }
         // Obtener 4 mascotas aleatorias del array de mascotas encontradas
-        this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, 4)
+        this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, cantidad)
         console.log(this.randomEncontradas)
-        this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, 4)
+        this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, cantidad)
       })
   }
 }
 </script>
 <style scoped>
+.mascotaCard{
+    width: 80px;
+
+}
 section{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 2em;
+}
+@media (min-width: 340px) {
+.mascotaCard{
+    width: 120px;
 
 }
+}
+@media (min-width: 900px) {
+  section{
+ justify-content: space-around;
+}
+.mascotaCard{
+    width: 150px;
 
+}
+}
 </style>

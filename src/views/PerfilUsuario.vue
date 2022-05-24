@@ -1,6 +1,5 @@
 <template>
 <div id="datosUsuario">
-  <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
 <form  @submit.prevent='EditarUsuario'>
       <h2>Bienvenido {{datoUsuario.nombre}}</h2>
       <p>{{editUserStatus}}</p>
@@ -18,6 +17,7 @@
         </form>
         <section>
         </section>
+        <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
         </div>
       <div id="mascotasList">
 <div  v-for="mascota in mascotas" :key= "mascota.id">
@@ -42,14 +42,13 @@ input, label{
   width: 100%;
 }
 form{
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
   text-align: start;
 }
 #datosUsuario{
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 #enviar{
@@ -78,6 +77,14 @@ form{
      opacity: 0.5;
       border-radius: 1em;
   }
+  @media (min-width: 900px) {
+.hiddenOnMovile{
+  display: block;
+}
+form{
+  width: 45%;
+}
+}
 </style>
 
 <script>

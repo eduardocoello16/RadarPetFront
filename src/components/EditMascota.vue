@@ -1,13 +1,13 @@
 <template>
 <div id="Card">
-      <img :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
+      <img class="hideonPC" :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
     <div class="cardForm"  v-if="propiedad == true">
       <div v-if="this.isCaducada == true">
         <p>Mascota Caducada, si quiere volver a activarla otros 3 meses pulsa aquí</p>
         <button @click="activarMascota">Activar Mascota</button>
       </div>
       <div v-else>
-      <form  @submit.prevent='editarMascota'>
+      <form  id="datosmascotaedit" @submit.prevent='editarMascota'>
         <label for="Nombre">Nombre</label>
         <input type="text" v-model="datosMascota.Nombre" id="nombre"  placeholder="Nombre">
         <label for="Raza">Raza</label>
@@ -41,12 +41,16 @@
 </div>  <!-- Cierre Card -->
 </template>
 <script>
+import CardMascota from '../components/CardMascota.vue'
 export default {
   name: 'EditMascota',
   props: {
     propiedad: {
       type: Boolean,
       default: false
+    },
+    components: {
+      CardMascota
     },
     mascota: Object
   },
@@ -139,6 +143,9 @@ export default {
   width: 100%;
  resize: none;
 }
+#datosmascotaedit{
+  padding: 2em;
+}
 #info{
   display: flex;
   width: 100%;
@@ -175,5 +182,10 @@ form{
   width: 100%;
   height: auto;
   cursor: pointer;
+}
+@media (min-width: 900px) {
+ .hideonPC{
+   display: none;
+ }
 }
 </style>

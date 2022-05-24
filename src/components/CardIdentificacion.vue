@@ -41,8 +41,8 @@ font-size: 1em;
     background-color: #23553f;
   }
 #cardIdenti{
-    width: 400px;
-    height: 620px;
+    width: 360px;
+    height: 530px;
     margin: 0 2em 0 4em;
     z-index: -2;
 }
