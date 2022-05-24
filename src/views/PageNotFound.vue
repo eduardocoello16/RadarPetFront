@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Page not found</h1>
+    <h1>Parece que ahora el que se ha perdido eres tu!</h1>
+    <h2>Page not found</h2>
   </div>
 </template>
 

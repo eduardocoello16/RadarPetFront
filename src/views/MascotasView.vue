@@ -1,15 +1,14 @@
 <template>
-<h1>Lista Mascotass:</h1>
   <h2>Perdidas</h2>
 <section id="perdidas">
 
-<div  class="mascotaCard" v-for="mascota in randomPerdidas" :key= "mascota.id">
+<div   v-for="mascota in randomPerdidas" :key= "mascota.id">
   <CardMascota  :mascota="mascota"/>
 </div>
 </section>
  <h2>Encontradas</h2>
   <section id="encontradas">
-<div   class="mascotaCard"  v-for="mascota in randomEncontradas" :key= "mascota.id">
+<div     v-for="mascota in randomEncontradas" :key= "mascota.id">
   <CardMascota :mascota="mascota"/>
 </div>
 </section>
@@ -61,10 +60,7 @@ export default {
 }
 </script>
 <style scoped>
-.mascotaCard{
-    width: 80px;
 
-}
 section{
   display: flex;
   flex-wrap: wrap;
@@ -72,19 +68,11 @@ section{
   justify-content: space-between;
   padding: 2em;
 }
-@media (min-width: 340px) {
-.mascotaCard{
-    width: 120px;
 
-}
-}
 @media (min-width: 900px) {
   section{
  justify-content: space-around;
 }
-.mascotaCard{
-    width: 150px;
 
-}
 }
 </style>

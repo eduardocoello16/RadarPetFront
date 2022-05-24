@@ -1,27 +1,25 @@
 <template>
 <div id="datosUsuario">
-<form  @submit.prevent='EditarUsuario'>
-      <h2>Bienvenido {{datoUsuario.nombre}}</h2>
-      <p>{{editUserStatus}}</p>
-         <label for="NombreUsuario">NombreUsuario</label>
-        <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
-           <label for="apellido">Apellido</label>
-        <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
-        <label for="tel">Teléfono</label>
-        <input type="text" v-model='user.telefono' id="tel" name="tel" />
-        <label for="email">Email</label>
-        <input type="text" v-model='user.email' id="mail" name="email" />
-        <label for="avatar">Avatar</label>
-         <input @change="onFileSelected" type="file" id="imagenup" ref="avatar" name="foto" />
-        <button id="enviar">Actualizar Datos</button>
-        </form>
-        <section>
-        </section>
-        <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
-        </div>
+  <form  @submit.prevent='EditarUsuario'>
+    <h2>Bienvenido {{datoUsuario.nombre}}</h2>
+    <p>{{editUserStatus}}</p>
+    <label for="NombreUsuario">NombreUsuario</label>
+    <input type="text" v-model='user.nombre'  id="NombreUsuario" name="nombre" />
+    <label for="apellido">Apellido</label>
+    <input type="text" v-model='user.apellido' id="apellido" name="apellido" />
+    <label for="tel">Teléfono</label>
+    <input type="text" v-model='user.telefono' id="tel" name="tel" />
+    <label for="email">Email</label>
+    <input type="text" v-model='user.email' id="mail" name="email" />
+    <label for="avatar">Avatar</label>
+    <input @change="onFileSelected" type="file" id="imagenup" ref="avatar" name="foto" />
+    <button id="enviar">Actualizar Datos</button>
+  </form>
+  <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
+</div>
       <div id="mascotasList">
 <div  v-for="mascota in mascotas" :key= "mascota.id">
-  <CardMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"></CardMascota>
+  <EditMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"/>
 </div>
 </div>
 
@@ -84,16 +82,20 @@ form{
 form{
   width: 45%;
 }
+#datosUsuario{
+  justify-content: space-around;
+}
+
 }
 </style>
 
 <script>
-import CardMascota from '../components/EditMascota.vue'
+import EditMascota from '../components/EditMascota.vue'
 import CardIdentificacion from '../components/CardIdentificacion.vue'
 export default {
   name: 'PerfilUsuario',
   components: {
-    CardMascota,
+    EditMascota,
     CardIdentificacion
   },
   data () {

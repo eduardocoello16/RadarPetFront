@@ -21,20 +21,24 @@
 
 .tema {
 
-    --color__primary: rgb(253, 253, 253);
+    --color__primary: rgb(250, 250, 250);
+     --color__secondary: whitesmoke;
     --color__headder: rgba(253, 253, 253, 0.975);
      --color__text: rgb(5, 12, 19);
+      --color__text2: rgb(65, 65, 65);
        --color__hover: rgba(226, 226, 226, 0.986);
 
     &-dark {
         --color__primary: rgb(17, 33, 49);
-            --color__headder: rgba(17, 33, 49, 0.956);
+         --color__secondary: whitesmoke;
+            --color__headder: rgba(17, 33, 49, 0.990);
          --color__text: rgb(252, 252, 252);
+        --color__text2: rgb(65, 65, 65);
           --color__hover: rgba(31, 31, 31, 0.801);
     }
 }
 *{
-  transition: background-color 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  transition: background-color 0.6s ease;
 }
 body{
   margin: 0;

@@ -44,7 +44,6 @@ font-size: 1em;
     width: 360px;
     height: 530px;
     margin: 0 2em 0 4em;
-    z-index: -2;
 }
 #identi{
   width: 100%;
@@ -54,19 +53,18 @@ font-size: 1em;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
 }
 #identiInfo{
   overflow: hidden;
   white-space: nowrap;
-  background: rgb(224, 224, 224);
+  background: var(--color__secondary);
   margin-top: 0;
   width: 100%;
   height: 50%;
   font-size: 0.9em;
   text-align: start;
     box-sizing: border-box;
-
+  color: var(--color__text2);
   padding: 2em;
   border-end-end-radius: 1em;
     border-end-start-radius: 1em;
