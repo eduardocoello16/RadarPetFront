@@ -21,7 +21,7 @@
 
 .tema {
 
-    --color__primary: rgb(250, 250, 250);
+    --color__primary: rgb(248, 248, 248);
      --color__secondary: whitesmoke;
     --color__headder: rgba(253, 253, 253, 0.975);
      --color__text: rgb(5, 12, 19);
@@ -29,7 +29,7 @@
        --color__hover: rgba(226, 226, 226, 0.986);
 
     &-dark {
-        --color__primary: rgb(17, 33, 49);
+        --color__primary: rgb(24, 38, 53);
          --color__secondary: whitesmoke;
             --color__headder: rgba(17, 33, 49, 0.990);
          --color__text: rgb(252, 252, 252);
@@ -38,7 +38,7 @@
     }
 }
 *{
-  transition: background-color 0.6s ease;
+  transition: background-color 0.4s ease;
 }
 body{
   margin: 0;

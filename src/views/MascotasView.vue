@@ -6,12 +6,19 @@
   <CardMascota  :mascota="mascota"/>
 </div>
 </section>
+ <router-link to="/mascotas/perdidas" >
+ <button>Ver todas</button>
+ </router-link>
  <h2>Encontradas</h2>
   <section id="encontradas">
 <div     v-for="mascota in randomEncontradas" :key= "mascota.id">
   <CardMascota :mascota="mascota"/>
 </div>
+
 </section>
+ <router-link to="/mascotas/encontradas" >
+ <button>Ver todas</button>
+ </router-link>
 </template>
 <script>
 import CardMascota from '../components/CardMascota.vue'
@@ -22,7 +29,6 @@ export default {
   },
   data () {
     return {
-      mascotas: [],
       randomEncontradas: [],
       randomPerdidas: [],
       mascotasEncontradas: [],
@@ -40,7 +46,6 @@ export default {
     })
       .then(respuesta => respuesta.json())
       .then(res => {
-        this.mascotas = res
         this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdido')
         this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
       })
@@ -53,7 +58,6 @@ export default {
         }
         // Obtener 4 mascotas aleatorias del array de mascotas encontradas
         this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, cantidad)
-        console.log(this.randomEncontradas)
         this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, cantidad)
       })
   }
