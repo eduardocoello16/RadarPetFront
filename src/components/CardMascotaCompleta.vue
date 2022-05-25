@@ -14,7 +14,6 @@
     </div>
 </template>
 <style scoped>
-
 #foto{
   width: 100%;
   height: 320px;

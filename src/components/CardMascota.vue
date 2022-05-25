@@ -10,7 +10,7 @@
 <style scoped>
 .loader {
   width: 100%;
-  height: 80%;
+  height: 100%;
   display: block;
   margin: auto;
   position: relative;
@@ -26,7 +26,6 @@
   position: absolute;
   background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5) 50%, transparent 100%),
    linear-gradient(#DDD 100px, transparent 0),
-   linear-gradient(#DDD 16px, transparent 0),
    linear-gradient(#DDD 50px, transparent 0);
   background-repeat: no-repeat;
   background-size: 75px 175px, 100% 100px, 100% 16px, 100% 30px;

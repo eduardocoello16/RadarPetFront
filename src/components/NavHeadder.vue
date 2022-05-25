@@ -1,12 +1,11 @@
 <template>
   <nav class="home">
      <div id="datos">
-       <div v-if="!token" id="avatar"></div> <!--Sustituto del avatar para no dejar el hueco -->
- <router-link v-if="token" to="/perfil" id="perfil">
+ <router-link to="/perfil" id="perfil">
  <div v-if="obtener" id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div>
  <p v-if="obtener" id="nombreUsuario">{{nombreUsuario}}</p></router-link>
      <router-link to="/"> <h1>RadarPet</h1></router-link>
-     <div >
+     <div id="buttonsleft" >
      <button @click="switchTema" class="Sesion">
        <svg v-if="modoOscuro" class="buton-color" id="SUN" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404.27 408.97"><defs></defs><path class="cls-1" d="M224.08,139c-151.69,2.7-150.91,231.47-.15,234.11C374.6,370.57,375.57,141.83,224.08,139Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M65,241.13C50.52,242.63,23,234,21.77,255.79c.88,22.22,28.65,13.54,43.32,15.09C84.06,270.78,84.15,241.17,65,241.13Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M411.76,241.12c-14.5,1.59-42.05-7.09-43.3,14.63.84,22.25,28.6,13.66,43.28,15.12C430.74,270.88,430.87,241.26,411.76,241.12Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M209.59,95.92A14.42,14.42,0,0,0,224,110.19c15.68-.06,15.07-17.58,14.44-29.12C239,69.46,239.91,51.58,224,51.52,202.21,53.05,211.22,81.28,209.59,95.92Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M238.41,416.19a14.41,14.41,0,0,0-14.29-14.38c-15.67-.13-15.22,17.42-14.56,29-.53,11.59-1.55,29.5,14.31,29.69C245.74,459.08,236.81,430.85,238.41,416.19Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M348.7,150.13c8.21-9.92,28-19.47,21-34.59-2.61-5.3-7.08-7.94-13-8.09-12,.85-19.46,15.18-28.14,22.45C316.82,142.29,336.23,161.84,348.7,150.13Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M98.1,149.11c13.36,13.72,34.1-7,20.32-20.41-9.59-7.65-14.87-21-28.83-21.22-4.63.21-9.16,3.09-11.57,8.65C71.93,130.69,90.35,139.41,98.1,149.11Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M99.37,361.81c-8.19,9.95-28.05,19.45-21.11,34.58,2.58,5.3,7,8,12.94,8.18,11.07-.26,20.62-16.11,28.72-23.12C130.88,369.13,111.32,350.41,99.37,361.81Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M349,362.11c-12.51-12.11-32.31,7.43-20.4,20,9.94,8.2,19.5,28.07,34.62,20.83C384.09,390,359.22,372.39,349,362.11Z" transform="translate(-21.77 -51.52)"/></svg>
        <svg v-if="!modoOscuro" class="buton-color" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 382.23"><title>moon</title><path d="M.75,204.71v-31.5c1-.27.72-1.16.83-1.83,1-6.53,1.62-13.12,2.92-19.63A190.36,190.36,0,0,1,41.08,71.1a196.35,196.35,0,0,1,72.21-57.65A188.74,188.74,0,0,1,144.48,2a12.79,12.79,0,0,1,13.85,5.05c3.14,4.56,3.07,9.86-.29,14.67-1.43,2-3,4-4.51,6C137.27,49.57,129,74.38,126.91,101.28a141.33,141.33,0,0,0,10,64.17,143.62,143.62,0,0,0,112.67,89,141.22,141.22,0,0,0,86.1-13.82,155.37,155.37,0,0,0,27.2-17.78c5.75-4.6,11.47-4.95,16.64-1.77,2.7,1.66,3.58,4.52,5.28,6.84v6.75c-1.23.74-1.11,2.13-1.44,3.25-1.76,5.84-3.28,11.74-5.38,17.49-12.68,34.72-33.27,63.85-62.42,86.54-32.34,25.18-69,39.2-110.18,41.48-26.69,1.49-52.76-1.74-77.48-11.64C57.45,343.61,15.56,291.94,2.74,217,2,212.89,2.44,208.63.75,204.71Z" transform="translate(-0.75 -1.58)"/></svg>
@@ -59,13 +58,29 @@ export default {
 <style lang="scss" scoped>
 .buton-color{
   fill: var(--color__text);
+  height: 100%;
+  widows: 100%;
 }
 #perfil:hover{
     background-color: var(--color__hover);
   border-radius: 2em;
 }
+#buttonsleft{
+    margin-top: 2em;
+  display: flex;
+  width: 5em;
+  height: 5em;
+   overflow: hidden;
+}
 #perfil{
-    margin-right: 2em;
+  margin-top: 2em;
+    height: 5em;
+    width: 5em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 #nombreUsuario{
   font-size: 0.6em;
@@ -118,9 +133,9 @@ nav.home{
         border-radius: 1em;
     }
     .Sesion{
-  width: 3em;
-  height: 3em;
-  margin-right: 1em;
+  width: 2.5em;
+  margin-right: 0.5em;
+  height: 2.5em;
 }
 .modooscuro{
   width: 1.5em;
@@ -149,16 +164,26 @@ button:hover{
   cursor: pointer;
 }
 @media (min-width: 900px) {
+  #buttonsleft{
+  width: 8em;
+  height: 8em;
+
+}
+#perfil{
+  width: 8em;
+  height: 8em;
+}
    .Sesion{
-  width: 3.5em;
-  height: 3.5em;
+  width: 4em;
+  height: 4em;
+    margin-right: 1em;
 }
   #nombreUsuario{
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
   #avatar{
-    width: 4em;
-    height: 4em;
+    width: 5em;
+    height: 5em;
   }
 h1{
   font-size: 3em;
