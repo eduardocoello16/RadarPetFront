@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 
 const routes = [
@@ -7,11 +6,6 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     component: PageNotFound
-  },
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
   },
   {
     path: '/infoMascota/:id',
@@ -30,7 +24,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/NuevaMascota.vue')
   },
   {
-    path: '/mascotas',
+    path: '/',
     name: 'mascotas',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

@@ -15,13 +15,13 @@
     <input @change="onFileSelected" type="file" id="imagenup" ref="avatar" name="foto" />
     <button id="enviar">Actualizar Datos</button>
   </form>
-  <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenOnMovile"/>
+  <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenCardOnMovile"/>
 </div>
       <div id="mascotasList">
 <div  v-for="mascota in mascotas" :key= "mascota.id">
   <div id="mascotaInfo">
   <EditMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"/>
-    <CardMascota  :mascota="mascota"/>
+    <CardMascota class="hiddenCardOnMovile" :mascota="mascota"/>
   </div>
 
 </div>
@@ -30,7 +30,8 @@
 </template>
 <style scoped>
 
-.hiddenOnMovile{
+.hiddenCardOnMovile{
+    width: 400px;
   display: none;
 }
 #mascotasList{
@@ -84,11 +85,11 @@ form{
   width: 40%;
 }
 
-.hiddenOnMovile{
+.hiddenCardOnMovile{
   display: block;
 }
 form{
-  width: 45%;
+  width: 50%;
 }
 #datosUsuario{
   justify-content: space-around;

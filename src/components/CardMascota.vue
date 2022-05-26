@@ -1,5 +1,5 @@
 <template>
-    <div id="cardMascota">
+    <div id="cardMascota" @click="irInfoMascota">
      <img id="foto" v-if="imagen" :src="imagen" alt="">
      <span v-if="!imagen" class="loader"></span>
       <div id="datos">
@@ -70,6 +70,10 @@ p{
   color: black;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
 }
+#cardMascota:hover{
+  transform: scale(1.1);
+   box-shadow: 6px 5px 7px rgba(0, 0, 0, 0.219);
+}
 @media (min-width: 340px) {
 #cardMascota{
     width: 120px;
@@ -112,6 +116,11 @@ export default {
         const imageObjectURL = URL.createObjectURL(res)
         this.imagen = imageObjectURL
       })
+  },
+  methods: {
+    irInfoMascota () {
+      this.$router.push('/infoMascota/' + this.mascota._id)
+    }
   }
 }
 </script>

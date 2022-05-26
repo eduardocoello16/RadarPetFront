@@ -1,7 +1,19 @@
 <template>
-    <h1>Prueba2: {{mascota}}</h1>
-    <CardMascotaCompleta :mascota="mascota"/>
+<h1>{{mascota.Nombre}}</h1>
+<section>
+    <CardMascotaCompleta  :mascota="mascota"/>
+    </section>
 </template>
+<style scoped>
+section{
+  margin: 2em;
+}
+@media (min-width: 900px) {
+  section{
+    width: 50%;
+  }
+}
+</style>
 <script>
 import CardMascotaCompleta from '../components/CardMascotaCompleta.vue'
 export default {
@@ -15,8 +27,8 @@ export default {
       id: this.$route.params.id
     }
   },
-  mounted () {
-    console.log(this.id)
+  created () {
+    this.mascota._id = this.$route.params.id
     fetch(`${process.env.VUE_APP_IP}mascota/mascota/${this.id}`, {
     })
       .then(response => response.json())

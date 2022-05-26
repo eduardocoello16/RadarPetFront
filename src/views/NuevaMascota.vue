@@ -93,7 +93,7 @@ export default {
       })
         .then(respuesta => {
           if (respuesta.status === 200) {
-            this.$router.push('/mascotas')
+            this.$router.push('/')
           } else {
             return respuesta.json()
           }
