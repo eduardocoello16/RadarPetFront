@@ -19,22 +19,22 @@
 </div>
       <div id="mascotasList">
 <div  v-for="mascota in mascotas" :key= "mascota.id">
+  <div id="mascotaInfo">
   <EditMascota @borrado="removeMascota" :mascota="mascota" :propiedad="true"/>
+    <CardMascota  :mascota="mascota"/>
+  </div>
+
 </div>
 </div>
 
 </template>
 <style scoped>
+
 .hiddenOnMovile{
   display: none;
 }
 #mascotasList{
-  margin: 2em;
   margin-top: 5em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 input, label{
   width: 100%;
@@ -76,6 +76,14 @@ form{
       border-radius: 1em;
   }
   @media (min-width: 900px) {
+    #mascotaInfo {
+      display: flex;
+      justify-content: center;
+}
+    #editMascota{
+  width: 40%;
+}
+
 .hiddenOnMovile{
   display: block;
 }
@@ -92,11 +100,13 @@ form{
 <script>
 import EditMascota from '../components/EditMascota.vue'
 import CardIdentificacion from '../components/CardIdentificacion.vue'
+import CardMascota from '../components/CardMascotaCompleta.vue'
 export default {
   name: 'PerfilUsuario',
   components: {
     EditMascota,
-    CardIdentificacion
+    CardIdentificacion,
+    CardMascota
   },
   data () {
     return {
