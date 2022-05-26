@@ -41,16 +41,12 @@
 </div>  <!-- Cierre Card -->
 </template>
 <script>
-import CardMascota from '../components/CardMascota.vue'
 export default {
   name: 'EditMascota',
   props: {
     propiedad: {
       type: Boolean,
       default: false
-    },
-    components: {
-      CardMascota
     },
     mascota: Object
   },
@@ -159,6 +155,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--color__secondary);
+  color: var(--color__text2);
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
 }
 .cardForm{
@@ -184,6 +182,9 @@ form{
   cursor: pointer;
 }
 @media (min-width: 900px) {
+  #Card{
+    width: 60%;
+  }
  .hideonPC{
    display: none;
  }

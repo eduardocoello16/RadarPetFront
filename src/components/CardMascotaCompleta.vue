@@ -1,16 +1,15 @@
 <template>
     <div id="cardMascota">
-      <img :style="{ caducada: isCaducada }" id="foto" :src="imagen" alt="">
+      <img id="foto" :src="imagen" alt="">
       <p> {{mascota.Nombre}}</p>
-      <p v-if="completa && mascota.Raza">Raza: {{mascota.Raza}}</p>
-      <p v-if="completa && mascota.Tipo">Raza: {{mascota.Tipo}}</p>
-      <p v-if="completa && mascota.Peso">Peso: {{mascota.Peso}}</p>
-      <p v-if="completa && mascota.Edad">Edad: {{mascota.Edad}}</p>
-      <p v-if="completa && mascota.Descripcion">Descripción: {{mascota.Descripcion}}</p>
-      <p v-if="completa && mascota.Ubicacion">Ubicación: {{mascota.Ubicacion}}</p>
-      <p v-if="completa && mascota.Tipocontacto">Contacto: {{mascota.Tipocontacto}}</p>
-      <p v-if="completa && mascota.Telefono">Teléfono: {{mascota.Telefono}}</p>
-      <p v-if="completa && mascota.Email">E-mail: {{mascota.Email}}</p>
+      <p v-if="mascota.Raza">Raza: {{mascota.Raza}}</p>
+      <p v-if="mascota.Tipo">Raza: {{mascota.Tipo}}</p>
+      <p v-if="mascota.Peso">Peso: {{mascota.Peso}}</p>
+      <p v-if="mascota.Edad">Edad: {{mascota.Edad}}</p>
+      <p v-if="mascota.Descripcion">Descripción: {{mascota.Descripcion}}</p>
+      <p v-if="mascota.Ubicacion">Ubicación: {{mascota.Ubicacion}}</p>
+      <p v-if="mascota.Telefono">Teléfono: {{mascota.Telefono}}</p>
+      <p v-if="mascota.Email">E-mail: {{mascota.Email}}</p>
     </div>
 </template>
 <style scoped>
@@ -21,15 +20,22 @@
 }
 
 #cardMascota{
-  width: 100%;
+  width: 400px;
     white-space: normal;
     overflow: hidden;
   margin: 10px;
   border-radius: 10px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
+   background-color: var(--color__secondary);
+  color: var(--color__text2);
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
+}
+@media (min-width: 900px) {
+ #cardMascota{
+   display: flex;
+ }
 }
 </style>
 <script>
