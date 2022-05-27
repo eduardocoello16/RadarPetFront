@@ -164,27 +164,11 @@ button:hover{
   cursor: pointer;
 }
 @media (min-width: 900px) {
-  #buttonsleft{
-  width: 8em;
-  height: 8em;
 
-}
-#perfil{
-  width: 8em;
-  height: 8em;
-}
-   .Sesion{
-  width: 4em;
-  height: 4em;
-    margin-right: 1em;
-}
   #nombreUsuario{
-  font-size: 1.5em;
+  font-size: 1em;
 }
-  #avatar{
-    width: 5em;
-    height: 5em;
-  }
+
 h1{
   font-size: 3em;
 }

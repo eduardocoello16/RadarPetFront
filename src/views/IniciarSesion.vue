@@ -16,9 +16,7 @@
       </div>
       </div>
       <div id="register" v-if="modo == 'register'">
-                <section id="sectionidenti">
-      <CardIdentificacion :imagen="imagen" :Usuario="user" />
-        </section>
+
         <section class="Formulario">
       <form  @submit.prevent='comprobarDatos'>
       <h2>Registra tus datos</h2>
@@ -46,10 +44,16 @@
         <button id="enviar">Enviar</button>
         </form>
         </section>
+          <section id="sectionidenti">
+      <CardIdentificacion class="hiddenCardOnMovile" :imagen="imagen" :Usuario="user" />
+        </section>
 
 </div>
 </template>
 <style scoped>
+.hiddenCardOnMovile{
+  display: none;
+}
 #loginmode{
 
   display: flex;
@@ -73,11 +77,18 @@ span{
   flex-wrap: wrap;
 }
 .Formulario{
-  width: 60%;
+
   display: flex;
   justify-content: center;
 }
-
+  @media (min-width: 900px) {
+    .Formulario{
+        width: 60%;
+    }
+.hiddenCardOnMovile{
+  display: block;
+}
+  }
 </style>
 <script>
 import CardIdentificacion from '../components/CardIdentificacion.vue'

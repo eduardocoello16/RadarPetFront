@@ -5,7 +5,7 @@
 <button @click="tipoestado = 'Perdido'">Perdido</button>
 </div>
 
-  <div v-if="tipoestado" class="pdsf">
+  <div v-if="tipoestado" class="contenedorForm">
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
@@ -27,7 +27,7 @@
           </select>
       <label for="ubicacion">Ubicación</label>
       <input type="text" v-model='Ubicacion' name="ubicacion" />
-      <label for="descripcion">Descripción</label>
+      <label  for="descripcion">Descripción</label>
       <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
         <img  id="imagenavatar" :src="imagen" alt="">
        <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
@@ -35,6 +35,26 @@
       </form>
   </div>
 </template>
+<style scoped>
+.contenedorForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+textarea{
+  width: 100%;
+ resize: none;
+}
+form{
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: start;
+}
+input, label{
+  width: 100%;
+}
+</style>
 <script>
 export default {
   data () {
