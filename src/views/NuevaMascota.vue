@@ -4,7 +4,7 @@
 <button @click="tipoestado = 'Encontrado'">Encontrado</button>
 <button @click="tipoestado = 'Perdido'">Perdido</button>
 </div>
-
+  <p>{{error}}</p>
   <div v-if="tipoestado" class="contenedorForm">
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
@@ -59,6 +59,7 @@ input, label{
 export default {
   data () {
     return {
+      error: '',
       tipoestado: '',
       contacto: '',
       Nombre: '',
@@ -118,7 +119,7 @@ export default {
             return respuesta.json()
           }
         })
-        .then(respuesta => (console.log(respuesta)))
+        .then(respuesta => (this.error = respuesta.msg))
     }
   }
 }

@@ -44,7 +44,12 @@ export default {
         'Content-Type': 'application/json'
       }
     })
-      .then(respuesta => respuesta.json())
+      .then(respuesta => {
+        if (respuesta.status !== 200) {
+          throw new Error('Error al obtener mascotas')
+        }
+        return respuesta.json()
+      })
       .then(res => {
         this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdido')
         this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
@@ -59,6 +64,9 @@ export default {
         // Obtener 4 mascotas aleatorias del array de mascotas encontradas
         this.randomEncontradas = this.mascotasEncontradas.sort(() => Math.random() - 0.5).slice(0, cantidad)
         this.randomPerdidas = this.mascotasPerdidas.sort(() => Math.random() - 0.5).slice(0, cantidad)
+      })
+      .catch(error => {
+        console.log(error)
       })
   }
 }
