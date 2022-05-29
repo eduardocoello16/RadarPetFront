@@ -3,10 +3,10 @@
       <div id="register">
 
         <section class="Formulario">
-      <form  @submit.prevent='comprobarDatos'>
+      <form  @submit.prevent='registrarUsuario'>
       <h2>Registra tus datos</h2>
-      <p>{{this.errores.server}}</p>
-      <p>{{this.errores.passregex}}</p>
+      <span>{{this.errores.server}}</span>
+      <span>{{this.errores.passregex}}</span>
          <label for="NombreUsuario">Nombre</label>
         <input type="text" v-model='user.nombre'  @change="verificarNombre" id="NombreUsuario" />
         <span>{{errores.nombre}}</span>
@@ -14,15 +14,15 @@
         <input type="text" v-model='user.apellido' @change="verificarApellido"  id="apellido" name="apellido" />
          <span>{{errores.apellido}}</span>
         <label for="tel">Teléfono</label>
-        <input type="text" v-model='user.telefono' id="tel" name="tel" />
+        <input type="tel" v-model='user.telefono' @change="verificarTelefono" id="tel" name="tel" />
          <span>{{errores.telefono}}</span>
         <label for="email">Email</label>
-        <input type="text" v-model='user.email' id="mail" name="registeremail" />
+        <input type="text" v-model='user.email' @change="verificarEmail" id="mail" name="registeremail" />
           <span>{{errores.email}}</span>
         <label for="password">Contraseña</label>
-        <input type="password" v-model='user.password' name="registerpassword" />
+        <input type="password" v-model='user.password' @change="verificarPass"  name="registerpassword" />
               <label for="password">Repite la Contraseña</label>
-        <input type="password" v-model='password2' name="registerpassword2" />
+        <input type="password" v-model='password2' @change="verificarPass" name="registerpassword2" />
         <span>{{errores.password}}</span>
         <label for="avatar">Avatar</label>
          <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
@@ -137,6 +137,39 @@ export default {
         this.errores.apellido = 'Apellido demasiado largo'
       }
     },
+    verificarTelefono (e) {
+      e.target.classList.remove('inputFail')
+      this.errores.telefono = ''
+      const telefonoregex = /^[0-9]{9}$/
+      if (!telefonoregex.test(this.user.telefono)) {
+        this.errores.telefono = 'El teléfono no es válido'
+      }
+    },
+    verificarPass (e) {
+    // Validar Contraseña
+      e.target.classList.remove('inputFail')
+      this.errores.password = ''
+      const passregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
+      if (!passregex.test(this.user.password)) {
+        this.errores.password = 'La contraseña no es segura'
+        this.errores.passregex = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial'
+      }
+      if (this.user.password !== this.password2) {
+        this.errores.password = 'Las contraseñas no coinciden'
+      }
+    },
+    verificarEmail (e) {
+      e.target.classList.remove('inputFail')
+      this.errores.email = ''
+      // eslint-disable-next-line no-useless-escape
+      const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+      if (!re.test(this.user.email.toLowerCase())) {
+        this.errores.email = 'Email no válido'
+      }
+      if (this.user.email > 40) {
+        this.errores.email = 'Email no válido'
+      }
+    },
     onFileSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
@@ -164,49 +197,6 @@ export default {
           }
         })
     },
-    comprobarDatos () {
-      let error = false
-      this.errores.nombre = ''
-      this.errores.apellido = ''
-      this.errores.telefono = ''
-      this.errores.email = ''
-      this.errores.password = ''
-      this.errores.passregex = ''
-      this.errores.imagen = ''
-      // Validar Contraseña
-      const passregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
-      if (!passregex.test(this.user.password)) {
-        this.errores.password = 'La contraseña no es segura'
-        this.errores.passregex = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial'
-        error = true
-      }
-      if (this.user.password !== this.password2) {
-        this.errores.password = 'Las contraseñas no coinciden'
-        error = true
-      }
-      // eslint-disable-next-line no-useless-escape
-      const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-      if (!re.test(this.user.email)) {
-        this.errores.email = 'Email no válido'
-        error = true
-      }
-      if (this.user.email > 40) {
-        this.errores.email = 'Email no válido'
-        error = true
-      }
-      // Validar nombre
-      if (this.user.nombre.length < 5) {
-        this.errores.nombre = 'Nombre vacío o muy corto'
-        error = true
-      }
-      if (this.user.nombre.length > 40) {
-        this.errores.nombre = 'Nombre demasiado largo'
-        error = true
-      }
-      if (error === false) {
-        this.registrarUsuario()
-      }
-    },
     registrarUsuario () {
       const newPost = this.user
       const formData = new FormData()
@@ -224,6 +214,8 @@ export default {
               .then(respuesta => {
                 this.errores.server = respuesta.msg.server
                 this.errores.email = respuesta.msg.email
+                this.errores.nombre = respuesta.msg.nombre
+                this.errores.apellido = respuesta.msg.apellido
               })
           }
         })
