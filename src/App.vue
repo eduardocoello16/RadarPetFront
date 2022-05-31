@@ -5,9 +5,7 @@
 </head>
   <NavHeadder/>
   <router-view/>
-  <div>
-    <h2>Footer</h2>
-  </div>
+  <NavFooter/>
 </template>
 
 <style lang="scss">
@@ -26,6 +24,7 @@
 .tema {
 
     --color__primary: rgb(248, 248, 248);
+    --color__color: rgb(202, 96, 26);
      --color__secondary: whitesmoke;
     --color__headder: rgba(253, 253, 253, 0.975);
      --color__text: rgb(5, 12, 19);
@@ -34,6 +33,7 @@
 
     &-dark {
         --color__primary: rgb(24, 38, 53);
+         --color__color: rgb(202, 96, 26);
          --color__secondary: whitesmoke;
             --color__headder: rgba(17, 33, 49, 0.990);
          --color__text: rgb(252, 252, 252);
@@ -54,10 +54,12 @@ body{
 <script>
 
 import NavHeadder from './components/NavHeadder.vue'
+import NavFooter from './components/NavFooter.vue'
 export default {
   name: 'App',
   components: {
-    NavHeadder
+    NavHeadder,
+    NavFooter
   },
   mounted () {
     document.body.classList.add('tema')
