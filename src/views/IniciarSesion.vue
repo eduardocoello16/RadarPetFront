@@ -4,8 +4,8 @@
     <h2>Iniciar Sesión</h2>
     <label for="email">Email</label>
     <input type="text" v-model='user.email' name="email" />
-    <label for="password">Contraseña</label>
-    <input type="password" v-model='user.password' name="password" />
+     <label for="password">Contraseña <img v-if="passwordField != 'password'" id="mostrar" src="../assets/ojo.svg" @click="mostrarPass" alt="mostrarPass"><img v-else id="mostrar" src="../assets/ojocerrado.svg" @click="mostrarPass" alt="mostrarPass"></label>
+    <input :type="passwordField" v-model='user.password' name="password" />
     <p id="error">{{error}}</p>
     <button id="enviar">Enviar</button>
     <div id="cambiarRegister">
@@ -16,6 +16,9 @@
 </div>
 </template>
 <style scoped>
+#mostrar{
+  width: 20px;
+}
 #cambiarRegister{
  text-align: center;
   width: 100%;
@@ -64,6 +67,7 @@ span{
 export default {
   data () {
     return {
+      passwordField: 'password',
       error: '',
       imagen: '',
       user: {
@@ -76,6 +80,9 @@ export default {
     document.title = 'Iniciar Sesión'
   },
   methods: {
+    mostrarPass () {
+      this.passwordField = this.passwordField === 'password' ? 'text' : 'password'
+    },
     onFileSelected (event) {
       this.imagen = URL.createObjectURL(event.target.files[0])
     },
@@ -95,7 +102,7 @@ export default {
             this.$store.dispatch('setAvatarImage')
             this.$router.push('/')
           } else {
-            this.errores.server = respuesta.msg
+            this.error = respuesta.msg
           }
         })
     }

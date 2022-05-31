@@ -6,7 +6,6 @@
       <form  @submit.prevent='registrarUsuario'>
       <h2>Registra tus datos</h2>
       <span>{{this.errores.server}}</span>
-      <span>{{this.errores.passregex}}</span>
          <label for="NombreUsuario">Nombre</label>
         <input type="text" v-model='user.nombre'  @change="verificarNombre" id="NombreUsuario" />
         <span>{{errores.nombre}}</span>
@@ -19,15 +18,16 @@
         <label for="email">Email</label>
         <input type="text" v-model='user.email' @change="verificarEmail" id="mail" name="registeremail" />
           <span>{{errores.email}}</span>
-        <label for="password">Contraseña</label>
-        <input type="password" v-model='user.password' @change="verificarPass"  name="registerpassword" />
+        <label for="password">Contraseña <img v-if="passwordField != 'password'" id="mostrar" src="../assets/ojo.svg" @click="mostrarPass" alt="mostrarPass"><img v-else id="mostrar" src="../assets/ojocerrado.svg" @click="mostrarPass" alt="mostrarPass"></label>
+        <input :type="passwordField" v-model='user.password' @change="verificarPass"  name="registerpassword" />
               <label for="password">Repite la Contraseña</label>
-        <input type="password" v-model='password2' @change="verificarPass" name="registerpassword2" />
+        <input :type="passwordField" v-model='password2' @change="verificarPass" name="registerpassword2" />
+              <span>{{this.errores.passregex}}</span>
         <span>{{errores.password}}</span>
         <label for="avatar">Avatar</label>
          <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
           <span>{{errores.imagen}}</span>
-        <button id="enviar">Enviar</button>
+        <button id="enviar">Iniciar</button>
         </form>
         </section>
           <section id="sectionidenti">
@@ -37,6 +37,9 @@
 </div>
 </template>
 <style scoped>
+#mostrar{
+  width: 20px;
+}
 .inputFail{
   border-color: red;
 }
@@ -90,6 +93,7 @@ export default {
   },
   data () {
     return {
+      passwordField: 'password',
       password2: '',
       errores: {
         passregex: '',
@@ -114,6 +118,9 @@ export default {
     document.title = 'Register'
   },
   methods: {
+    mostrarPass () {
+      this.passwordField = this.passwordField === 'password' ? 'text' : 'password'
+    },
     verificarNombre (e) {
       e.target.classList.remove('inputFail')
       this.errores.nombre = ''
