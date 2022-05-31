@@ -1,6 +1,7 @@
 <template>
 <head>
   <meta name="viewport" content= "width=device-width, user-scalable=no">
+  <meta name="google" content="notranslate">
 </head>
   <NavHeadder/>
   <router-view/>

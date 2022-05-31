@@ -57,27 +57,30 @@ p{
 }
 
 #cardMascota{
+  margin: 0.5em;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     white-space: normal;
     overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--color__secondary);
   color: black;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.219);
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.062);
 }
 #cardMascota:hover{
   transform: scale(1.1);
-   box-shadow: 6px 5px 7px rgba(0, 0, 0, 0.219);
+   box-shadow: 6px 5px 7px rgba(0, 0, 0, 0.144);
 }
 @media (min-width: 340px) {
 #cardMascota{
     width: 120px;
     height: 120px;
+     margin-top: 0.8em;
+     margin-bottom: 0.8em;
 
 }
 p{

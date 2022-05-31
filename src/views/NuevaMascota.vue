@@ -1,11 +1,14 @@
 <template>
-<h2>Crear Mascotas</h2>
+<h2>Crear Mascotas {{tipoestado}}</h2>
 <div v-if="!tipoestado">
 <button @click="tipoestado = 'Encontrado'">Encontrado</button>
 <button @click="tipoestado = 'Perdido'">Perdido</button>
 </div>
   <p>{{error}}</p>
-  <div v-if="tipoestado" class="contenedorForm">
+  <div v-if="tipoestado" >
+        <button class="start" v-if="tipoestado === 'Encontrado'" @click="tipoestado = 'Perdido'">Perdido</button>
+        <button v-if="tipoestado === 'Perdido'" @click="tipoestado = 'Encontrado'">Encontrado</button>
+        <div class="contenedorForm">
     <form @submit.prevent='enviarDatos'>
       <label for="nombre"  >Nombre</label>
       <input type="text" v-model='Nombre' name="Nombre" />
@@ -33,6 +36,7 @@
        <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
       <button id="enviar">Enviar</button>
       </form>
+  </div>
   </div>
 </template>
 <style scoped>

@@ -1,13 +1,17 @@
 <template>
   <nav class="home">
      <div id="datos">
- <router-link to="/perfil" id="perfil">
- <div id="infoUser">
+        <div id="perfil">
+ <router-link to="/perfil" id="infoUser" >
+
  <div v-if="obtener" id="avatar"  v-bind:style="{ backgroundImage: 'url(' + obtener + ')' }" ></div>
  <p v-if="obtener" id="nombreUsuario">{{nombreUsuario}}</p>
+   </router-link>
   </div>
- </router-link>
-     <router-link to="/" id="nombreWeb"> <h1>RadarPet</h1></router-link>
+
+     <router-link to="/" id="nombreWeb">
+     <h1>RadarPet</h1>
+     </router-link>
      <div id="buttonsleft" >
      <button @click="switchTema" class="Sesion">
        <svg v-if="modoOscuro" class="buton-color" id="SUN" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404.27 408.97"><defs></defs><path class="cls-1" d="M224.08,139c-151.69,2.7-150.91,231.47-.15,234.11C374.6,370.57,375.57,141.83,224.08,139Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M65,241.13C50.52,242.63,23,234,21.77,255.79c.88,22.22,28.65,13.54,43.32,15.09C84.06,270.78,84.15,241.17,65,241.13Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M411.76,241.12c-14.5,1.59-42.05-7.09-43.3,14.63.84,22.25,28.6,13.66,43.28,15.12C430.74,270.88,430.87,241.26,411.76,241.12Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M209.59,95.92A14.42,14.42,0,0,0,224,110.19c15.68-.06,15.07-17.58,14.44-29.12C239,69.46,239.91,51.58,224,51.52,202.21,53.05,211.22,81.28,209.59,95.92Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M238.41,416.19a14.41,14.41,0,0,0-14.29-14.38c-15.67-.13-15.22,17.42-14.56,29-.53,11.59-1.55,29.5,14.31,29.69C245.74,459.08,236.81,430.85,238.41,416.19Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M348.7,150.13c8.21-9.92,28-19.47,21-34.59-2.61-5.3-7.08-7.94-13-8.09-12,.85-19.46,15.18-28.14,22.45C316.82,142.29,336.23,161.84,348.7,150.13Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M98.1,149.11c13.36,13.72,34.1-7,20.32-20.41-9.59-7.65-14.87-21-28.83-21.22-4.63.21-9.16,3.09-11.57,8.65C71.93,130.69,90.35,139.41,98.1,149.11Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M99.37,361.81c-8.19,9.95-28.05,19.45-21.11,34.58,2.58,5.3,7,8,12.94,8.18,11.07-.26,20.62-16.11,28.72-23.12C130.88,369.13,111.32,350.41,99.37,361.81Z" transform="translate(-21.77 -51.52)"/><path class="cls-1" d="M349,362.11c-12.51-12.11-32.31,7.43-20.4,20,9.94,8.2,19.5,28.07,34.62,20.83C384.09,390,359.22,372.39,349,362.11Z" transform="translate(-21.77 -51.52)"/></svg>
@@ -69,15 +73,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .buton-color{
   fill: var(--color__text);
   height: 100%;
   widows: 100%;
 }
-#perfil:hover{
-    background-color: var(--color__hover);
-  border-radius: 2em;
-}
+
 #buttonsleft{
    flex-basis: 100%;
   display: flex;
@@ -94,7 +96,6 @@ export default {
   flex-wrap: wrap;
   width: 3em;
   justify-content: center;
-
 }
 
 #nombreWeb{
@@ -194,6 +195,7 @@ button:hover{
 }
 
 @media (min-width: 900px) {
+
 #datos{
     padding: 1.5em;
 }
