@@ -16,6 +16,8 @@
         <select name="tipo" id="tipo"  v-model="datosMascota.Tipo" >
             <option value="Perro">Perro</option>
             <option value="Gato">Gato</option>
+              <option value="Pajaro">Pajaro</option>
+        <option value="Otro">Otro</option>
         </select>
         <label for="contacto">Contacto</label>
         <select name="contacto" id="contacto"  v-model="datosMascota.Tipocontacto" >

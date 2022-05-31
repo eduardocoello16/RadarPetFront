@@ -52,8 +52,8 @@ export default {
         return respuesta.json()
       })
       .then(res => {
-        this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdido')
-        this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
+        this.mascotasPerdidas = res.filter(mascota => mascota.TipoEstado === 'Perdida')
+        this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrada')
       })
       .then(() => {
         let cantidad

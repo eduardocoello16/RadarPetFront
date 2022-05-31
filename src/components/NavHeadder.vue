@@ -123,7 +123,8 @@ h1{
 }
 
 .home{
-  background-color: var(--color__headder);
+  background-color: var(--color__primary);
+   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.096);
   color: var(--color__text);
   position: sticky;
   width: 100%;

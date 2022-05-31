@@ -1,7 +1,7 @@
 <template>
 <h1>{{mascota.Nombre}}</h1>
 <section>
-    <CardMascotaCompleta  :mascota="mascota"/>
+    <CardMascotaCompleta  :mascota="mascota" :contacto="contacto"/>
     </section>
 </template>
 <style scoped>
@@ -24,6 +24,7 @@ export default {
   data () {
     return {
       mascota: Object,
+      contacto: String,
       id: this.$route.params.id
     }
   },
@@ -33,7 +34,8 @@ export default {
     })
       .then(response => response.json())
       .then(res => {
-        this.mascota = res
+        this.mascota = res.mascota
+        this.contacto = res.contacto
       })
   }
 

@@ -29,7 +29,7 @@ export default {
     })
       .then(respuesta => respuesta.json())
       .then(res => {
-        this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrado')
+        this.mascotasEncontradas = res.filter(mascota => mascota.TipoEstado === 'Encontrada')
       })
   }
 }

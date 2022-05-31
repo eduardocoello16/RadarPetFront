@@ -8,7 +8,7 @@
       <p v-if="mascota.Edad">Edad: {{mascota.Edad}}</p>
       <p v-if="mascota.Descripcion">Descripción: {{mascota.Descripcion}}</p>
       <p v-if="mascota.Ubicacion">Ubicación: {{mascota.Ubicacion}}</p>
-      <p v-if="mascota.Contacto">Contacto: {{mascota.Contacto}}</p>
+      <p v-if="contacto">Contacto: {{contacto}}</p>
     </div>
 </template>
 <style scoped>
@@ -35,7 +35,8 @@
 export default {
   name: 'CardMascotaCompleta',
   props: {
-    mascota: Object
+    mascota: Object,
+    contacto: String
   },
   data () {
     return {
