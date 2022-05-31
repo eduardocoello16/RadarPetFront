@@ -12,7 +12,7 @@
     <label for="email">Email</label>
     <input type="text" v-model='user.email' id="mail" name="email" />
     <label for="avatar">Avatar</label>
-    <input @change="onFileSelected" type="file" id="imagenup" ref="avatar" name="foto" />
+    <input @change="onFileSelected" type="file" accept="image/png,image/jpeg" id="imagenup" ref="avatar" name="foto" />
     <button id="enviar">Actualizar Datos</button>
   </form>
   <CardIdentificacion :imagen="imagen" :Usuario="user" class="hiddenCardOnMovile"/>
@@ -29,7 +29,6 @@
 
 </template>
 <style scoped>
-
 .hiddenCardOnMovile{
     width: 400px;
   display: none;
@@ -51,11 +50,11 @@ form{
   justify-content: center;
 }
 #enviar{
-  background: #23553f;
+      background-color: var(--color__color);
   color: whitesmoke;
   margin-top: 1.5em;
   border: none;
-  font-size: 2em;
+  font-size: 1em;
   border-radius: 10px;
 }
   #avatar{

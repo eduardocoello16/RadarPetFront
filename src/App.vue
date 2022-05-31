@@ -50,6 +50,17 @@ body{
   background-color: var(--color__primary);
   color: var(--color__text);
 }
+button{
+  padding:  0.8em;
+      background-color: var(--color__color);
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  border-radius: 1em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 </style>
 <script>
 

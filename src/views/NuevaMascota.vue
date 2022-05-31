@@ -41,7 +41,7 @@
       <label  for="descripcion">Descripción</label>
       <textarea name="descripcion" id="descripcion" cols="30" rows="10" v-model='Descripcion'></textarea>
         <img  id="imagenavatar" :src="imagen" alt="">
-       <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
+       <input @change="onFileSelected" type="file" accept="image/png,image/jpeg" id="imagenup" ref="foto" name="foto" />
       <button id="enviar">Enviar</button>
       </form>
   </div>

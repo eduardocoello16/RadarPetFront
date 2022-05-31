@@ -169,7 +169,7 @@ button:hover{
 }
 #publicar{
   padding:  0.8em;
-  background-color: #23553f;
+    background-color: var(--color__color);
   color: white;
   font-weight: bold;
   font-size: 0.8em;

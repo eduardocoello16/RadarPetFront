@@ -25,9 +25,9 @@
               <span>{{this.errores.passregex}}</span>
         <span>{{errores.password}}</span>
         <label for="avatar">Avatar</label>
-         <input @change="onFileSelected" type="file" id="imagenup" ref="foto" name="foto" />
+        <input @change="onFileSelected" type="file" accept="image/png,image/jpeg"  id="imagenup" ref="foto" name="foto" />
           <span>{{errores.imagen}}</span>
-        <button id="enviar">Iniciar</button>
+        <button id="enviar">Registrarte</button>
         </form>
         </section>
           <section id="sectionidenti">
@@ -37,6 +37,29 @@
 </div>
 </template>
 <style scoped>
+#subida{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+/* Input type file */
+
+button{
+  padding:  0.8em;
+      background-color: var(--color__color);
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  border-radius: 1em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover{
+  background-color: var(--color__hover);
+}
 #mostrar{
   width: 20px;
 }

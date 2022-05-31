@@ -7,7 +7,7 @@
      <label for="password">Contraseña <img v-if="passwordField != 'password'" id="mostrar" src="../assets/ojo.svg" @click="mostrarPass" alt="mostrarPass"><img v-else id="mostrar" src="../assets/ojocerrado.svg" @click="mostrarPass" alt="mostrarPass"></label>
     <input :type="passwordField" v-model='user.password' name="password" />
     <p id="error">{{error}}</p>
-    <button id="enviar">Enviar</button>
+    <button id="enviar">Iniciar Sesión</button>
     <div id="cambiarRegister">
       <p>¿No tienes cuenta?</p>
       <router-link to="/registrarse"> <button>Registrarte</button></router-link>
@@ -16,10 +16,25 @@
 </div>
 </template>
 <style scoped>
+button{
+  padding:  0.8em;
+  background-color: var(--color__color);
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  border-radius: 1em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover{
+  background-color: var(--color__hover);
+}
 #mostrar{
   width: 20px;
 }
 #cambiarRegister{
+  margin-top: 120px;
  text-align: center;
   width: 100%;
 }

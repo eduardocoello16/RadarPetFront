@@ -33,7 +33,7 @@
         <label for="Ubicacion">Ubicacion</label>
         <input type="text" v-model="datosMascota.Ubicacion" id="ubicacion" placeholder="Ubicacion">
         <label for="fotoMascota">Foto Mascota</label>
-        <input @change="onFileMascotaSelected" type="file" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
+        <input @change="onFileMascotaSelected" type="file" accept="image/png,image/jpeg" id="imagenMascota" ref="fotoMascota" name="fotoMascota" />
         <button type="submit">Guardar</button>
       </form>
     </div>
@@ -137,6 +137,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+button{
+    margin-top: 1.2em;
+}
 #descripcion{
   width: 100%;
  resize: none;
