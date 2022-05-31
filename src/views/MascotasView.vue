@@ -1,5 +1,5 @@
 <template>
-  <h2>Perdidas</h2>
+  <h2>Mascotas perdidas</h2>
 <section id="perdidas">
 
 <div   v-for="mascota in randomPerdidas" :key= "mascota.id">
@@ -9,7 +9,7 @@
  <router-link to="/mascotas/perdidas" >
  <button>Ver todas</button>
  </router-link>
- <h2>Encontradas</h2>
+ <h2> Mascotas encontradas</h2>
   <section id="encontradas">
 <div     v-for="mascota in randomEncontradas" :key= "mascota.id">
   <CardMascota :mascota="mascota"/>
