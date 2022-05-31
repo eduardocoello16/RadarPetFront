@@ -19,7 +19,7 @@ img{
 }
 footer{
  margin-top: 200px;
-    background: var(--color__secondary);
+    background: var(--color__primary);
       text-align: end;
       padding: 2em;
       box-sizing: border-box;
