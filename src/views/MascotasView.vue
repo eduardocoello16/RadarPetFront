@@ -19,6 +19,7 @@
  <router-link to="/mascotas/encontradas" >
  <button>Ver todas</button>
  </router-link>
+
 </template>
 <script>
 import CardMascota from '../components/CardMascota.vue'

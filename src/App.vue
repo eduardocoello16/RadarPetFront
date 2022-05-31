@@ -1,9 +1,12 @@
 <template>
-<header>
+<head>
   <meta name="viewport" content= "width=device-width, user-scalable=no">
-</header>
+</head>
   <NavHeadder/>
   <router-view/>
+  <div>
+    <h2>Footer</h2>
+  </div>
 </template>
 
 <style lang="scss">

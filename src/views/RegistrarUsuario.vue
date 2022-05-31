@@ -149,6 +149,7 @@ export default {
     // Validar Contraseña
       e.target.classList.remove('inputFail')
       this.errores.password = ''
+      this.errores.passregex = ''
       const passregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
       if (!passregex.test(this.user.password)) {
         this.errores.password = 'La contraseña no es segura'
@@ -214,6 +215,7 @@ export default {
               .then(respuesta => {
                 this.errores.server = respuesta.msg.server
                 this.errores.email = respuesta.msg.email
+                this.errores.password = respuesta.msg.password
                 this.errores.nombre = respuesta.msg.nombre
                 this.errores.apellido = respuesta.msg.apellido
               })
