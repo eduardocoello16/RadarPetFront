@@ -2,8 +2,10 @@
 
 App Desplegada: https://radarpet.netlify.app/#/
 ### Variables de entorno
+IP del lado servidor 
 ```
-yarn serve
+
+VUE_APP_IP
 ```
 
 ## Project setup
