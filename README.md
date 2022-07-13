@@ -4,7 +4,6 @@ App Desplegada: https://radarpet.netlify.app/#/
 ### Variables de entorno
 IP del lado servidor 
 ```
-
 VUE_APP_IP
 ```
 
