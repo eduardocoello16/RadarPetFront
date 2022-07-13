@@ -1,6 +1,10 @@
 # radarpetcli
 
 App Desplegada: https://radarpet.netlify.app/#/
+### Variables de entorno
+```
+yarn serve
+```
 
 ## Project setup
 ```
